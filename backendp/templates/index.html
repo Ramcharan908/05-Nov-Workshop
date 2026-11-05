@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101210">
+  <title>CampusPulse | Events around you</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css', v=2) }}">
+  <script>
+    window.CAMPUSPULSE_CONFIG = {{ {
+      'supabaseUrl': supabase_url,
+      'supabaseKey': supabase_publishable_key
+    } | tojson }};
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script type="module" src="{{ url_for('static', filename='app.js') }}"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="CampusPulse home">
+      <span class="brand-mark"><i data-lucide="radio-tower"></i></span>
+      <span class="brand-name">Campus<span>Pulse</span><small>LIVE STUDENT EVENT SIGNAL</small></span>
+    </a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a class="nav-link is-current" href="#events">Campus Feed</a>
+      <a class="nav-link" href="#events" data-nav-filter="Career & Networking">Academic & Career</a>
+      <a class="nav-link" href="#events" data-nav-filter="Creative & Gaming">Student Clubs</a>
+      <a class="nav-link" href="#events" data-nav-filter="All Happenings">Campus Venues</a>
+    </nav>
+    <label class="top-search" for="top-search-input">
+      <i data-lucide="search"></i>
+      <input id="top-search-input" type="search" placeholder="Search events, clubs, venues..." autocomplete="off">
+      <kbd>/</kbd>
+    </label>
+    <div class="account-area">
+      <span class="connection-dot" aria-hidden="true"></span>
+      <button class="account-button" id="account-button" type="button">
+        <span class="avatar" id="avatar">?</span>
+        <span class="account-copy"><strong id="account-name">Guest student</strong><small id="account-role">SIGN IN TO RSVP</small></span>
+        <i data-lucide="chevron-down"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <section class="hero-panel" aria-labelledby="page-title">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="live-pulse"></span> FALL 2026 CAMPUS LIFE CALENDAR</div>
+        <h1 id="page-title">What's happening<br class="mobile-break"> on campus?</h1>
+        <p>Find your next idea, collaborator, or favorite corner of campus.</p>
+      </div>
+      <div class="hero-stats" aria-label="Event statistics">
+        <div class="stat-box"><strong id="stat-week">--</strong><span>LIVE EVENTS</span></div>
+        <div class="stat-box"><strong id="stat-rsvps">--</strong><span>STUDENT RSVPS</span></div>
+        <div class="stat-box"><strong id="stat-venues">--</strong><span>ACTIVE VENUES</span></div>
+      </div>
+      <div class="hero-bottom">
+        <span class="filter-caption">FILTER BY INTEREST</span>
+        <div class="category-list" id="category-list" role="group" aria-label="Filter by interest">
+          <button class="category-chip is-selected" data-category="All Happenings" type="button"><span class="chip-dot"></span>All Happenings</button>
+          <button class="category-chip" data-category="Tech & AI" type="button"><span class="chip-icon">⌘</span>Tech &amp; AI</button>
+          <button class="category-chip" data-category="Career & Networking" type="button"><span class="chip-icon">↗</span>Career &amp; Networking</button>
+          <button class="category-chip" data-category="Creative & Gaming" type="button"><span class="chip-icon">✳</span>Creative &amp; Gaming</button>
+          <button class="category-chip" data-category="Startups & Pitch" type="button"><span class="chip-icon">◉</span>Startups &amp; Pitch</button>
+          <button class="category-chip" data-category="Workshops" type="button"><span class="chip-icon">▤</span>Workshops</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="session-strip" aria-label="Current session">
+      <div class="session-icon"><i data-lucide="user-round"></i></div>
+      <div class="session-copy"><strong id="session-title">Browsing as a guest</strong><small id="session-detail">Campus events · RSVP requires sign in</small></div>
+      <button class="text-action" id="my-registrations" type="button"><i data-lucide="ticket-check"></i><span>My registrations</span><b id="registration-count">0</b></button>
+    </section>
+
+    <section class="event-controls" id="events" aria-label="Find campus events">
+      <label class="event-search" for="event-search-input">
+        <i data-lucide="search"></i>
+        <input id="event-search-input" type="search" placeholder="Search event, club, organizer, or venue..." autocomplete="off">
+        <kbd>⌘ K</kbd>
+      </label>
+      <div class="date-filters" role="group" aria-label="Filter by date">
+        <button class="date-chip is-active" data-date="all" type="button">All dates</button>
+        <button class="date-chip" data-date="today" type="button">Today</button>
+        <button class="date-chip" data-date="weekend" type="button">This weekend</button>
+        <button class="date-chip" data-date="popular" type="button">Popular</button>
+      </div>
+    </section>
+
+    <div class="feed-heading">
+      <div><span class="section-kicker">THE CAMPUS FEED</span><h2 id="feed-title">Coming up around you</h2></div>
+      <span class="result-count" id="result-count">Loading events...</span>
+    </div>
+    <div class="notice-bar" id="data-notice" hidden></div>
+    <section class="event-grid" id="event-grid" aria-live="polite" aria-label="Campus events"></section>
+    <section class="empty-state" id="empty-state" hidden>
+      <span class="empty-icon"><i data-lucide="scan-search"></i></span>
+      <h3>No events match that search</h3>
+      <p>Try another keyword or clear your filters.</p>
+      <button class="button-secondary" id="clear-filters" type="button">Clear filters</button>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="footer-brand" href="/"><i data-lucide="radio-tower"></i> CampusPulse</a>
+    <span>Campus events, in one place.</span>
+    <span class="footer-status"><span class="connection-dot"></span><span id="api-status">CONNECTING TO CAMPUS DATA</span></span>
+  </footer>
+
+  <dialog class="modal" id="auth-dialog" aria-labelledby="auth-title">
+    <form class="modal-panel" id="auth-form">
+      <button class="modal-close icon-button" type="button" data-close="auth-dialog" aria-label="Close"><i data-lucide="x"></i></button>
+      <span class="modal-mark"><i data-lucide="user-round-check"></i></span>
+      <span class="section-kicker">CAMPUSPULSE ACCOUNT</span>
+      <h2 id="auth-title">Welcome back</h2>
+      <p class="modal-description" id="auth-description">Sign in to save your seat at the next campus event.</p>
+      <label class="field-label" for="auth-email">University email</label>
+      <input class="form-input" id="auth-email" name="email" type="email" placeholder="you@university.edu" autocomplete="email" required>
+      <label class="field-label" for="auth-password">Password</label>
+      <input class="form-input" id="auth-password" name="password" type="password" placeholder="At least 8 characters" autocomplete="current-password" minlength="8" required>
+      <p class="form-feedback" id="auth-feedback" role="status"></p>
+      <button class="button-primary modal-submit" id="auth-submit" type="submit">Sign in <i data-lucide="arrow-right"></i></button>
+      <button class="mode-switch" id="auth-mode-switch" type="button">New to CampusPulse? <strong>Create an account</strong></button>
+    </form>
+  </dialog>
+
+  <dialog class="modal" id="registrations-dialog" aria-labelledby="registrations-title">
+    <div class="modal-panel registrations-panel">
+      <button class="modal-close icon-button" type="button" data-close="registrations-dialog" aria-label="Close"><i data-lucide="x"></i></button>
+      <span class="section-kicker">YOUR CAMPUS CALENDAR</span>
+      <h2 id="registrations-title">My registrations</h2>
+      <div class="registration-list" id="registration-list"></div>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

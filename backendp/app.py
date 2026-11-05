@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, render_template, request
 from supabase import create_client, Client
 from postgrest import APIError
 from dotenv import load_dotenv
@@ -42,19 +42,11 @@ def _authenticated_user():
 
 @app.route('/')
 def index():
-    try:
-        response = supabase.table('users').select("*").execute()
-    except APIError as error:
-        return f'<p>Error loading users: {error.message}</p>'
-
-    users = response.data
-
-    html = '<h1>users</h1><ul>'
-    for user in users:
-        html += f'<li>{user["email"]}</li>'
-    html += '</ul>'
-
-    return html
+    return render_template(
+        'index.html',
+        supabase_url=os.environ.get('SUPABASE_URL', ''),
+        supabase_publishable_key=os.environ.get('SUPABASE_PUBLISHABLE_KEY', ''),
+    )
 
 
 @app.get('/api/events')
