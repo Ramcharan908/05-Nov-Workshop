@@ -1,10 +1,11 @@
 import os
+from pathlib import Path
 from flask import Flask, jsonify, request
 from supabase import create_client, Client
 from postgrest import APIError
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(Path(__file__).with_name('.env'))
 
 app = Flask(__name__)
 
