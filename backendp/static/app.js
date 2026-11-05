@@ -4,6 +4,9 @@ const config = window.CAMPUSPULSE_CONFIG || {};
 const supabase = config.supabaseUrl && config.supabaseKey
   ? createClient(config.supabaseUrl, config.supabaseKey)
   : null;
+const isLocal = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+const API_BASE_URL = isLocal ? window.location.origin : 'https://zero5-nov-workshop-4.onrender.com';
+const apiUrl = (path) => `${API_BASE_URL}${path}`;
 
 const fallbackEvents = [
   {
@@ -233,7 +236,7 @@ function setSession(nextSession) {
 async function loadEvents() {
   const status = document.querySelector('#api-status');
   try {
-    const response = await fetch('/api/events');
+    const response = await fetch(apiUrl('/api/events'));
     if (!response.ok) throw new Error('Campus event data is temporarily unavailable.');
     const data = await response.json();
     const rows = Array.isArray(data) ? data : data.events || [];
@@ -262,7 +265,7 @@ async function loadEvents() {
 async function loadRegistrations() {
   if (!session?.access_token) return;
   try {
-    const response = await fetch('/api/me/registrations', { headers: { Authorization: `Bearer ${session.access_token}` } });
+    const response = await fetch(apiUrl('/api/me/registrations'), { headers: { Authorization: `Bearer ${session.access_token}` } });
     if (!response.ok) throw new Error('Could not load your registrations.');
     const registrations = await response.json();
     userRegistrations = Array.isArray(registrations) ? registrations : [];
@@ -351,7 +354,7 @@ async function handleRsvp(eventId) {
   const button = grid.querySelector(`[data-event-id="${CSS.escape(eventId)}"]`);
   if (button) button.disabled = true;
   try {
-    const response = await fetch('/api/registrations', {
+    const response = await fetch(apiUrl('/api/registrations'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${session.access_token}` },
       body: JSON.stringify({ event_id: eventId })
