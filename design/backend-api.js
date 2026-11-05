@@ -66,7 +66,8 @@
     if (title) title.textContent = event.title;
     card.id = event.id;
     card.dataset.eventId = event.id;
-    card.dataset.owner = event.organiser_id || '';
+    const organizerId = event.organiser_id || event.organizer_id || '';
+    card.dataset.owner = organizerId;
     card.dataset.capacity = String(event.capacity || 0);
     card.dataset.status = status;
     card.dataset.category = category.toLowerCase();
@@ -79,16 +80,17 @@
     if (statusBadge) statusBadge.textContent = status === 'sold-out' ? 'SOLD OUT' : status === 'almost-full' ? 'ALMOST FULL' : 'OPEN';
 
     const dateBadge = [...card.querySelectorAll('span')]
-      .find((item) => /^(?:\w{3},?\s+)?(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{1,2}(?:,\s+\d{4})?$/i.test(item.textContent.trim()) || item.textContent.trim() === 'SCHEDULE TBA');
-    const scheduledAt = event.starts_at || event.start_time || event.event_date;
+      .find((item) => /\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{1,2}\b/i.test(item.textContent.trim()) || /SCHEDULE TBA/i.test(item.textContent.trim()));
+    const scheduledAt = event.starts_at || event.start_at || event.start_time || event.event_date || event.date;
     if (dateBadge) dateBadge.textContent = scheduledAt ? new Date(scheduledAt).toLocaleString() : 'SCHEDULE TBA';
     const locationIcon = [...card.querySelectorAll('.material-symbols-outlined')]
       .find((item) => item.textContent.trim() === 'location_on');
-    if (locationIcon?.nextElementSibling && !event.location && !event.venue) locationIcon.nextElementSibling.textContent = 'Venue details not set';
+    const venue = event.location || event.venue || event.venue_name;
+    if (locationIcon?.nextElementSibling) locationIcon.nextElementSibling.textContent = venue || 'Venue details not set';
     const description = card.querySelector('p');
-    if (description && !event.description && !event.summary) description.textContent = 'Additional event details have not been added yet.';
+    if (description) description.textContent = event.description || event.summary || 'Additional event details have not been added yet.';
     const owner = [...card.querySelectorAll('span')].find((item) => /^usr_|[0-9a-f]{8}-[0-9a-f-]{27,}$/i.test(item.textContent.trim()));
-    if (owner) owner.textContent = event.organiser_id || 'Organizer not set';
+    if (owner) owner.textContent = event.organizer_name || event.organizer || organizerId || 'Organizer not set';
     const eventIdLabel = [...card.querySelectorAll('span')].find((item) => /^id:\s*evt_/i.test(item.textContent.trim()));
     if (eventIdLabel) eventIdLabel.textContent = `id: ${event.id.slice(0, 12)}…`;
 
