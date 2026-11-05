@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>CampusEvent Engine</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-container-high": "#292a2d", "on-secondary": "#1000a9", "primary": "#4edea3", "surface-tint": "#4edea3", "primary-fixed-dim": "#4edea3", "outline": "#86948a", "inverse-primary": "#006c49", "on-tertiary-fixed-variant": "#653e00", "secondary-fixed-dim": "#c0c1ff", "surface-bright": "#38393c", "on-error-container": "#ffdad6", "tertiary-container": "#e29100", "secondary-fixed": "#e1e0ff", "inverse-surface": "#e3e2e6", "tertiary-fixed": "#ffddb8", "primary-fixed": "#6ffbbe", "on-background": "#e3e2e6", "surface-dim": "#121316", "error-container": "#93000a", "on-primary-container": "#00422b", "outline-variant": "#3c4a42", "secondary-container": "#3131c0", "on-secondary-fixed-variant": "#2f2ebe", "on-surface": "#e3e2e6", "on-surface-variant": "#bbcabf", "surface": "#121316", "on-tertiary-fixed": "#2a1700", "surface-container-lowest": "#0d0e11", "background": "#121316", "surface-container-low": "#1b1b1f", "on-tertiary-container": "#523200", "surface-container-highest": "#343538", "on-primary-fixed": "#002113", "on-error": "#690005", "inverse-on-surface": "#2f3033", "primary-container": "#10b981", "surface-container": "#1f1f23", "on-primary": "#003824", "tertiary": "#ffb95f", "error": "#ffb4ab", "on-tertiary": "#472a00", "surface-variant": "#343538", "on-primary-fixed-variant": "#005236", "tertiary-fixed-dim": "#ffb95f", "secondary": "#c0c1ff", "on-secondary-fixed": "#07006c", "on-secondary-container": "#b0b2ff" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-lg": "1rem", "space-md": "0.75rem", "space-xs": "0.25rem", "space-xl": "1.5rem", "space-sm": "0.5rem", "margin": "1.5rem", "gutter": "1rem" }, "fontFamily": { "headline-md": [ "Inter" ], "body-md": [ "Inter" ], "label-code-sm": [ "JetBrains Mono" ], "headline-xl": [ "Inter" ], "headline-lg": [ "Inter" ], "label-code-md": [ "JetBrains Mono" ], "badge-caps": [ "JetBrains Mono" ], "title-md": [ "Inter" ], "body-sm": [ "Inter" ] }, "fontSize": { "headline-md": [ "20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "body-md": [ "14px", { "lineHeight": "20px", "fontWeight": "400" } ], "label-code-sm": [ "11px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "400" } ], "headline-xl": [ "32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "headline-lg": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "label-code-md": [ "13px", { "lineHeight": "18px", "fontWeight": "500" } ], "badge-caps": [ "10px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "600" } ], "title-md": [ "16px", { "lineHeight": "24px", "fontWeight": "500" } ], "body-sm": [ "13px", { "lineHeight": "18px", "fontWeight": "400" } ] } } } };</script></head><body class="bg-surface-container-lowest font-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-low/90 backdrop-blur-md"><div class="h-16 w-full px-margin flex items-center justify-between gap-gutter"><div class="flex items-center gap-space-md"><a class="flex items-center gap-space-sm" data-path="events-catalog" href="#"><div class="h-8 w-8 rounded-lg bg-surface-container-highest flex items-center justify-center"><span class="material-symbols-outlined text-primary text-[20px]">dataset</span></div><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-headline-md text-headline-md tracking-tight text-on-surface">EventPulse</span><span class="font-badge-caps text-badge-caps uppercase px-1.5 py-0.5 rounded bg-surface-container-highest text-primary">ENGINE</span></div><span class="font-label-code-sm text-label-code-sm text-on-surface-variant flex items-center gap-1"><span class="h-1.5 w-1.5 rounded-full bg-primary animate-pulse"></span>Local Schema Live</span></div></a></div><nav class="hidden xl:flex items-center gap-space-xs bg-surface-container p-1 rounded-xl" data-active-classes="bg-surface-container-high text-on-surface font-title-md"><a class="px-space-md py-1.5 rounded text-on-surface-variant font-body-sm text-body-sm transition-colors hover:text-on-surface hover:bg-surface-container-high" data-path="events-catalog" href="#">Events Catalog</a><a class="px-space-md py-1.5 rounded text-on-surface-variant font-body-sm text-body-sm transition-colors hover:text-on-surface hover:bg-surface-container-high" data-path="manage-and-create-events" href="#">Manage &amp; Create Events</a><a class="px-space-md py-1.5 rounded text-on-surface-variant font-body-sm text-body-sm transition-colors hover:text-on-surface hover:bg-surface-container-high" data-path="registrations-and-attendees" href="#">Registrations &amp; Attendees</a><a class="px-space-md py-1.5 rounded text-on-surface-variant font-body-sm text-body-sm transition-colors hover:text-on-surface hover:bg-surface-container-high" data-path="database-schema-viewer" href="#">Database Schema Viewer</a></nav><div class="flex items-center gap-space-md"><div class="hidden md:flex items-center bg-surface-container px-space-md py-1 rounded-lg text-on-surface-variant gap-space-sm"><span class="material-symbols-outlined text-[18px]">search</span><span class="font-body-sm text-body-sm">Search entities...</span><kbd class="font-label-code-sm text-label-code-sm bg-surface-container-highest px-1.5 py-0.5 rounded text-on-surface">⌘K</kbd></div><button class="h-8 w-8 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span></button><div class="relative group"><div class="flex items-center gap-space-sm bg-surface-container hover:bg-surface-container-high px-space-md py-1 rounded-xl cursor-pointer transition-all"><div class="flex flex-col text-right"><div class="flex items-center justify-end gap-space-xs"><span class="font-body-sm text-body-sm text-on-surface font-medium">Alex Rivera</span><span class="font-badge-caps text-badge-caps bg-primary-container/20 text-primary px-1 rounded uppercase">organizer</span></div><span class="font-label-code-sm text-label-code-sm text-on-surface-variant truncate max-w-[140px]">alex@univ.edu</span></div><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1X8n6S8otyJBqFpxm_xnTJ-M0w_btPmW9bUjhd3yckijY6eutpPHHGu1bLtBxhtYWzmgdbA_RzzMjOSEr06ycQiq3nsFXwx8BWTOLyxX4asljw28AGh9fIL9B7EKGPIyUSkI02KXcCOuJh-PDiffpBGoDs4skhOVwJVe6Sm2GJce-UAEUd0ykkoBvJNngOQvv1ywa8VIChZa5Fk-GD8L4EquffPC5SzIHJEn-u2qUuh"/><span class="material-symbols-outlined text-on-surface-variant text-[18px]">expand_more</span></div><div class="absolute right-0 top-full mt-2 w-80 bg-surface-container-high rounded-xl p-space-sm shadow-[0_12px_32px_rgba(0,0,0,0.6)] hidden group-hover:block z-50"><div class="px-space-sm py-1 mb-1 flex items-center justify-between"><span class="font-badge-caps text-badge-caps uppercase tracking-wider text-on-surface-variant">Simulated User Context</span><span class="font-label-code-sm text-label-code-sm text-primary flex items-center gap-1"><span class="h-1.5 w-1.5 rounded-full bg-primary"></span>No-Auth Mode</span></div><div class="flex flex-col gap-1"><div class="p-space-sm rounded bg-surface-container flex items-center justify-between cursor-pointer"><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-body-sm text-body-sm text-on-surface font-medium">Alex Rivera</span><span class="font-badge-caps text-badge-caps bg-primary-container text-on-primary-container px-1 rounded uppercase">active</span></div><span class="font-label-code-sm text-label-code-sm text-on-surface-variant">alex@univ.edu</span><span class="font-label-code-sm text-label-code-sm text-on-surface-variant">uuid: usr_9f82d1c4</span></div><span class="material-symbols-outlined text-primary text-[18px]">check_circle</span></div><div class="p-space-sm rounded hover:bg-surface-container flex items-center justify-between cursor-pointer transition-colors"><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-body-sm text-body-sm text-on-surface font-medium">Maya Chen</span><span class="font-badge-caps text-badge-caps bg-secondary-container/40 text-secondary px-1 rounded uppercase">student</span></div><span class="font-label-code-sm text-label-code-sm text-on-surface-variant">maya@univ.edu</span><span class="font-label-code-sm text-label-code-sm text-on-surface-variant">uuid: usr_4a11b980</span></div><span class="material-symbols-outlined text-on-surface-variant text-[18px]">swap_horiz</span></div><div class="p-space-sm rounded hover:bg-surface-container flex items-center justify-between cursor-pointer transition-colors"><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-body-sm text-body-sm text-on-surface font-medium">Marcus Brody</span><span class="font-badge-caps text-badge-caps bg-tertiary-container/30 text-tertiary px-1 rounded uppercase">admin</span></div><span class="font-label-code-sm text-label-code-sm text-on-surface-variant">marcus@univ.edu</span><span class="font-label-code-sm text-label-code-sm text-on-surface-variant">uuid: usr_7c34ea12</span></div><span class="material-symbols-outlined text-on-surface-variant text-[18px]">swap_horiz</span></div></div></div></div></div></div></header><main class="w-full pt-16 bg-surface-container-lowest min-h-screen"><div class="flex flex-col w-full">
+<!-- Subtle Dot Grid Background Anchor -->
+<div class="w-full px-margin py-space-xl flex flex-col gap-space-xl max-w-7xl mx-auto">
+<!-- Top Context & Header Strip -->
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-lg">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="font-badge-caps text-badge-caps uppercase tracking-wider px-2 py-0.5 rounded bg-surface-container text-primary font-medium">TABLE: registrations</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">link</span>
+            INNER JOIN users ON student_id = users.uuid
+          </span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-secondary">link</span>
+            INNER JOIN events ON event_id = events.event_id
+          </span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight mt-1">Registrations &amp; Attendees Roster</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-3xl">
+          Track user signups per event linked via Foreign Keys (<span class="font-label-code-sm text-label-code-sm text-primary px-1.5 py-0.5 rounded bg-surface-container">student_id → users.uuid</span>, <span class="font-label-code-sm text-label-code-sm text-secondary px-1.5 py-0.5 rounded bg-surface-container">event_id → events.event_id</span>). Zero-friction manual mutations active.
+        </p>
+</div>
+<!-- Quick Action: Manual Registration Modal Trigger -->
+<div class="flex items-center gap-space-sm self-start lg:self-auto shrink-0">
+<button class="h-9 px-space-md rounded bg-primary text-on-primary font-title-md text-body-sm flex items-center gap-space-xs hover:opacity-90 shadow-md transition-all" id="open-quick-reg">
+<span class="material-symbols-outlined text-[18px]">person_add</span>
+<span>Quick Register Impersonated User</span>
+<kbd class="font-label-code-sm text-label-code-sm bg-on-primary/20 text-on-primary px-1.5 py-0.2 rounded ml-1">⌘R</kbd>
+</button>
+</div>
+</div>
+<!-- Analytics Metric Cards Bento with SVG Sparkline & Radial -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Card 1 -->
+<div class="bg-surface-container p-space-lg rounded-xl flex flex-col justify-between shadow-sm relative overflow-hidden group">
+<div class="absolute -right-4 -bottom-4 w-24 h-24 bg-primary/5 rounded-full pointer-events-none group-hover:scale-125 transition-transform"></div>
+<div class="flex items-center justify-between text-on-surface-variant mb-space-sm">
+<span class="font-badge-caps text-badge-caps uppercase tracking-wider text-on-surface-variant">Total Confirmations</span>
+<span class="material-symbols-outlined text-primary text-[20px]">how_to_reg</span>
+</div>
+<div class="flex items-baseline gap-space-sm">
+<span class="font-headline-xl text-headline-xl text-on-surface font-semibold">892</span>
+<span class="font-label-code-sm text-label-code-sm text-primary flex items-center">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>+12.4%
+          </span>
+</div>
+<div class="mt-space-md pt-space-xs flex items-center justify-between font-label-code-sm text-label-code-sm text-on-surface-variant">
+<span>Active Rows</span>
+<span class="text-on-surface font-medium">COUNT(id)</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container p-space-lg rounded-xl flex flex-col justify-between shadow-sm relative overflow-hidden group">
+<div class="absolute -right-4 -bottom-4 w-24 h-24 bg-secondary/5 rounded-full pointer-events-none group-hover:scale-125 transition-transform"></div>
+<div class="flex items-center justify-between text-on-surface-variant mb-space-sm">
+<span class="font-badge-caps text-badge-caps uppercase tracking-wider text-on-surface-variant">Recent 24h Signups</span>
+<span class="material-symbols-outlined text-secondary text-[20px]">history</span>
+</div>
+<div class="flex items-baseline justify-between">
+<div class="flex items-baseline gap-space-sm">
+<span class="font-headline-xl text-headline-xl text-on-surface font-semibold">46</span>
+<span class="font-label-code-sm text-label-code-sm text-secondary bg-secondary-container/20 px-1.5 py-0.5 rounded">+8 vs avg</span>
+</div>
+<!-- Inline Sparkline Chart -->
+<svg class="w-16 h-8 text-secondary shrink-0" fill="none" viewbox="0 0 64 32">
+<path d="M2 28L12 24L22 26L32 16L42 19L52 8L62 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<circle cx="62" cy="4" fill="currentColor" r="2.5"></circle>
+</svg>
+</div>
+<div class="mt-space-md pt-space-xs flex items-center justify-between font-label-code-sm text-label-code-sm text-on-surface-variant">
+<span>&gt; NOW() - INTERVAL '24h'</span>
+<span class="text-primary flex items-center gap-1"><span class="h-1.5 w-1.5 rounded-full bg-primary animate-ping"></span> Live</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container p-space-lg rounded-xl flex flex-col justify-between shadow-sm relative overflow-hidden group">
+<div class="absolute -right-4 -bottom-4 w-24 h-24 bg-tertiary/5 rounded-full pointer-events-none group-hover:scale-125 transition-transform"></div>
+<div class="flex items-center justify-between text-on-surface-variant mb-space-sm">
+<span class="font-badge-caps text-badge-caps uppercase tracking-wider text-on-surface-variant">Unique Students</span>
+<span class="material-symbols-outlined text-tertiary text-[20px]">group</span>
+</div>
+<div class="flex items-baseline gap-space-sm">
+<span class="font-headline-xl text-headline-xl text-on-surface font-semibold">341</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">of 520 campus users</span>
+</div>
+<div class="mt-space-md pt-space-xs flex items-center justify-between font-label-code-sm text-label-code-sm text-on-surface-variant">
+<span>Penetration rate</span>
+<span class="text-on-surface font-medium">65.5% student body</span>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container p-space-lg rounded-xl flex flex-col justify-between shadow-sm relative overflow-hidden group">
+<div class="flex items-center justify-between text-on-surface-variant mb-space-sm">
+<span class="font-badge-caps text-badge-caps uppercase tracking-wider text-on-surface-variant">Avg Registrations / Student</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">pie_chart</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-headline-xl text-headline-xl text-on-surface font-semibold">2.6</span>
+<!-- Inline Radial Dial SVG -->
+<div class="relative w-10 h-10 flex items-center justify-center">
+<svg class="w-10 h-10 -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-container-high" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="4"></path>
+<path class="text-primary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="65, 100" stroke-linecap="round" stroke-width="4"></path>
+</svg>
+<span class="absolute font-badge-caps text-badge-caps text-primary">HIGH</span>
+</div>
+</div>
+<div class="mt-space-md pt-space-xs flex items-center justify-between font-label-code-sm text-label-code-sm text-on-surface-variant">
+<span>Standard Deviation</span>
+<span class="text-on-surface font-medium">σ = 0.84</span>
+</div>
+</div>
+</div>
+<!-- Filter Control Strip: Search & Event Dropdown Filter -->
+<div class="bg-surface-container p-space-md rounded-xl shadow-sm flex flex-col md:flex-row items-stretch md:items-center justify-between gap-space-md">
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-space-md flex-1">
+<!-- Search Input -->
+<div class="relative flex-1 max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[18px] text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-lowest text-on-surface pl-10 pr-4 py-1.5 rounded-lg font-body-sm text-body-sm placeholder:text-outline focus:outline-none focus:ring-1 focus:ring-primary shadow-inner" id="search-filter-input" placeholder="Filter by student name, email, or event title..." type="text"/>
+</div>
+<!-- Event Selector Dropdown -->
+<div class="flex items-center gap-space-xs">
+<label class="font-label-code-sm text-label-code-sm text-on-surface-variant shrink-0 flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">filter_list</span>
+            Event Scope:
+          </label>
+<div class="relative">
+<select class="appearance-none bg-surface-container-lowest text-on-surface pl-3 pr-8 py-1.5 rounded-lg font-label-code-sm text-label-code-sm focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer shadow-inner" id="event-selector-filter">
+<option value="all">All Events (892 confirmed)</option>
+<option value="evt_99b1">Hackathon 2025: AI &amp; System Design (120 registered)</option>
+<option value="evt_33f2">PostgreSQL Workshop: Index Tuning (35 registered)</option>
+<option value="evt_84a0">Robotics Open Lab: ROS2 Autonomous Rovers (48 registered)</option>
+<option value="evt_12c9">Quantum Computing Campus Forum (28 registered)</option>
+<option value="evt_77d4">Game Jam 2025: Low Poly Shaders (85 registered)</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-[16px]">arrow_drop_down</span>
+</div>
+</div>
+</div>
+<!-- Quick Query Execution Details -->
+<div class="flex items-center justify-between sm:justify-end gap-space-md text-on-surface-variant font-label-code-sm text-label-code-sm shrink-0">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">bolt</span>
+          3.2ms plan execution
+        </span>
+<button class="p-1.5 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface transition-colors flex items-center" id="refresh-roster-btn" title="Re-query DB">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+</button>
+</div>
+</div>
+<!-- Data Grid Container mimicking DB schema browser -->
+<div class="bg-surface-container rounded-xl shadow-md overflow-hidden flex flex-col">
+<!-- Table Schema Metadata Header -->
+<div class="px-space-lg py-space-sm bg-surface-container-high flex flex-wrap items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<span class="font-headline-md text-title-md text-on-surface font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">table_rows</span>
+            Schema View: <span class="font-label-code-sm text-label-code-sm text-on-surface font-normal">public.registrations</span>
+</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant bg-surface-container-highest px-2 py-0.5 rounded">
+            INDEX idx_reg_event_student_created (btree)
+          </span>
+</div>
+<div class="flex items-center gap-space-sm font-label-code-sm text-label-code-sm text-on-surface-variant">
+<span>Sort: <strong class="text-on-surface">created_at DESC</strong></span>
+</div>
+</div>
+<!-- Responsive Table View -->
+<div class="overflow-x-auto w-full">
+<table class="w-full text-left font-body-sm text-body-sm">
+<thead>
+<tr class="bg-surface-container-low text-on-surface-variant font-label-code-sm text-label-code-sm uppercase tracking-wider">
+<th class="py-space-md px-space-lg font-medium">Registration ID</th>
+<th class="py-space-md px-space-lg font-medium">Student (users.uuid)</th>
+<th class="py-space-md px-space-lg font-medium">Event Title &amp; ID</th>
+<th class="py-space-md px-space-lg font-medium">Role</th>
+<th class="py-space-md px-space-lg font-medium">Registered At (timestamptz)</th>
+<th class="py-space-md px-space-lg font-medium text-right">Mutations</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-highest" id="roster-tbody">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-high/60 transition-colors group" data-event-id="evt_99b1">
+<td class="py-space-md px-space-lg font-label-code-sm text-label-code-sm text-primary">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-outline">fingerprint</span>
+<span class="hover:underline cursor-pointer" title="Copy UUID">reg_81fa940e</span>
+</div>
+</td>
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-sm">
+<img class="w-8 h-8 rounded-full object-cover shrink-0" data-alt="Close-up portrait of student Maya Chen, Asian female developer with dark hair, glasses, subtle glowing mint green studio lighting, soft blurred background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCn2exIm3bPxluCEtqBn2MMN1XFxeB7CaynDlr-htMXWB4cQrXNibg0wDDcvpgpjsB8z6mKJuvc97wtq8k6VcpqoL5bgYAxze9IvrWjQPH3x5fOV00-Pw8TuoYra-3Cvozq9VjaD2awNxnSYb3kBG2tb7-byfDyoo7eonK9nwcxW_x0ifa1P5FDczYkBDWvd-l7LkTpU68gElNXsz9vtBZh4LhOmAxq0NP9gaSRC64"/>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-body-sm text-on-surface font-medium truncate">Maya Chen</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant truncate">maya@univ.edu</span>
+</div>
+<span class="font-badge-caps text-badge-caps bg-surface-container-highest text-on-surface-variant px-1.5 py-0.5 rounded font-mono ml-1">usr_4a11b980</span>
+</div>
+</td>
+<td class="py-space-md px-space-lg">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Hackathon 2025: AI &amp; System Design</span>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="font-label-code-sm text-label-code-sm text-secondary">evt_99b1fa8a</span>
+<span class="font-badge-caps text-badge-caps bg-primary/10 text-primary px-1 rounded uppercase">confirmed</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-lg">
+<span class="font-badge-caps text-badge-caps uppercase px-2 py-0.5 rounded bg-secondary-container/40 text-secondary font-medium">student</span>
+</td>
+<td class="py-space-md px-space-lg font-label-code-sm text-label-code-sm text-on-surface-variant">
+<span class="text-on-surface">2024-11-12</span> 14:23:18 <span class="text-outline">UTC</span>
+</td>
+<td class="py-space-md px-space-lg text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="inspect-btn p-1 rounded hover:bg-surface-container-highest text-on-surface-variant hover:text-on-surface transition-colors" title="Inspect Raw JSON">
+<span class="material-symbols-outlined text-[18px]">data_object</span>
+</button>
+<button class="delete-btn p-1 rounded hover:bg-error-container/30 text-error hover:text-error transition-colors" title="Delete / Unregister row">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-high/60 transition-colors group" data-event-id="evt_33f2">
+<td class="py-space-md px-space-lg font-label-code-sm text-label-code-sm text-primary">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-outline">fingerprint</span>
+<span class="hover:underline cursor-pointer" title="Copy UUID">reg_49a022b7</span>
+</div>
+</td>
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-sm">
+<img class="w-8 h-8 rounded-full object-cover shrink-0" data-alt="Portrait of Alex Rivera, Hispanic male organizer with casual tech hoodie, warm ambient neon studio lighting, direct sharp focus" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbcwGKufZndQYCMBGuJos_O6DBxOIVVGKFpQlpijQMfxmPKBYNhijlduchgTM4Tq3DmOW8fo05LZCkXTvwLDMgC-oAbqNRcLkeYU2kgP4rFSaTc3LyqCIxp0YvJoiX8NgPyuTaDOC_hp2ogM-Jxr4rZRBfdK7gJoEq14lHGB_dnNnRZCSdzW2Omh2zvLgNvWPmPWWnN84zR2LJflWp2xu36riwGitvWWUhQtR55_w"/>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-body-sm text-on-surface font-medium truncate">Alex Rivera</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant truncate">alex@univ.edu</span>
+</div>
+<span class="font-badge-caps text-badge-caps bg-surface-container-highest text-on-surface-variant px-1.5 py-0.5 rounded font-mono ml-1">usr_9f82d1c4</span>
+</div>
+</td>
+<td class="py-space-md px-space-lg">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-medium">PostgreSQL Workshop: Index Tuning</span>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="font-label-code-sm text-label-code-sm text-secondary">evt_33f2bb01</span>
+<span class="font-badge-caps text-badge-caps bg-primary/10 text-primary px-1 rounded uppercase">confirmed</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-lg">
+<span class="font-badge-caps text-badge-caps uppercase px-2 py-0.5 rounded bg-primary-container/20 text-primary font-medium">organizer</span>
+</td>
+<td class="py-space-md px-space-lg font-label-code-sm text-label-code-sm text-on-surface-variant">
+<span class="text-on-surface">2024-11-12</span> 13:45:02 <span class="text-outline">UTC</span>
+</td>
+<td class="py-space-md px-space-lg text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="inspect-btn p-1 rounded hover:bg-surface-container-highest text-on-surface-variant hover:text-on-surface transition-colors" title="Inspect Raw JSON">
+<span class="material-symbols-outlined text-[18px]">data_object</span>
+</button>
+<button class="delete-btn p-1 rounded hover:bg-error-container/30 text-error hover:text-error transition-colors" title="Delete / Unregister row">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-high/60 transition-colors group" data-event-id="evt_84a0">
+<td class="py-space-md px-space-lg font-label-code-sm text-label-code-sm text-primary">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-outline">fingerprint</span>
+<span class="hover:underline cursor-pointer" title="Copy UUID">reg_c3021dd9</span>
+</div>
+</td>
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary flex items-center justify-center font-title-md text-body-sm font-semibold shrink-0">
+                    JD
+                  </div>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-body-sm text-on-surface font-medium truncate">Julian Vance</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant truncate">jvance@univ.edu</span>
+</div>
+<span class="font-badge-caps text-badge-caps bg-surface-container-highest text-on-surface-variant px-1.5 py-0.5 rounded font-mono ml-1">usr_10e4088a</span>
+</div>
+</td>
+<td class="py-space-md px-space-lg">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Robotics Open Lab: ROS2 Autonomous Rovers</span>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="font-label-code-sm text-label-code-sm text-secondary">evt_84a0c812</span>
+<span class="font-badge-caps text-badge-caps bg-primary/10 text-primary px-1 rounded uppercase">confirmed</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-lg">
+<span class="font-badge-caps text-badge-caps uppercase px-2 py-0.5 rounded bg-secondary-container/40 text-secondary font-medium">student</span>
+</td>
+<td class="py-space-md px-space-lg font-label-code-sm text-label-code-sm text-on-surface-variant">
+<span class="text-on-surface">2024-11-12</span> 11:10:44 <span class="text-outline">UTC</span>
+</td>
+<td class="py-space-md px-space-lg text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="inspect-btn p-1 rounded hover:bg-surface-container-highest text-on-surface-variant hover:text-on-surface transition-colors" title="Inspect Raw JSON">
+<span class="material-symbols-outlined text-[18px]">data_object</span>
+</button>
+<button class="delete-btn p-1 rounded hover:bg-error-container/30 text-error hover:text-error transition-colors" title="Delete / Unregister row">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-high/60 transition-colors group" data-event-id="evt_99b1">
+<td class="py-space-md px-space-lg font-label-code-sm text-label-code-sm text-primary">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-outline">fingerprint</span>
+<span class="hover:underline cursor-pointer" title="Copy UUID">reg_71dd8033</span>
+</div>
+</td>
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-tertiary-container text-on-tertiary flex items-center justify-center font-title-md text-body-sm font-semibold shrink-0">
+                    MB
+                  </div>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-body-sm text-on-surface font-medium truncate">Marcus Brody</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant truncate">marcus@univ.edu</span>
+</div>
+<span class="font-badge-caps text-badge-caps bg-surface-container-highest text-on-surface-variant px-1.5 py-0.5 rounded font-mono ml-1">usr_7c34ea12</span>
+</div>
+</td>
+<td class="py-space-md px-space-lg">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Hackathon 2025: AI &amp; System Design</span>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="font-label-code-sm text-label-code-sm text-secondary">evt_99b1fa8a</span>
+<span class="font-badge-caps text-badge-caps bg-primary/10 text-primary px-1 rounded uppercase">confirmed</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-lg">
+<span class="font-badge-caps text-badge-caps uppercase px-2 py-0.5 rounded bg-tertiary-container/30 text-tertiary font-medium">admin</span>
+</td>
+<td class="py-space-md px-space-lg font-label-code-sm text-label-code-sm text-on-surface-variant">
+<span class="text-on-surface">2024-11-12</span> 09:05:59 <span class="text-outline">UTC</span>
+</td>
+<td class="py-space-md px-space-lg text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="inspect-btn p-1 rounded hover:bg-surface-container-highest text-on-surface-variant hover:text-on-surface transition-colors" title="Inspect Raw JSON">
+<span class="material-symbols-outlined text-[18px]">data_object</span>
+</button>
+<button class="delete-btn p-1 rounded hover:bg-error-container/30 text-error hover:text-error transition-colors" title="Delete / Unregister row">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-container-high/60 transition-colors group" data-event-id="evt_12c9">
+<td class="py-space-md px-space-lg font-label-code-sm text-label-code-sm text-primary">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-outline">fingerprint</span>
+<span class="hover:underline cursor-pointer" title="Copy UUID">reg_6e88510a</span>
+</div>
+</td>
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-primary flex items-center justify-center font-title-md text-body-sm font-semibold shrink-0">
+                    SL
+                  </div>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-body-sm text-on-surface font-medium truncate">Siddharth Lal</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant truncate">slal@univ.edu</span>
+</div>
+<span class="font-badge-caps text-badge-caps bg-surface-container-highest text-on-surface-variant px-1.5 py-0.5 rounded font-mono ml-1">usr_55f190bc</span>
+</div>
+</td>
+<td class="py-space-md px-space-lg">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Quantum Computing Campus Forum</span>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="font-label-code-sm text-label-code-sm text-secondary">evt_12c904fa</span>
+<span class="font-badge-caps text-badge-caps bg-primary/10 text-primary px-1 rounded uppercase">confirmed</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-lg">
+<span class="font-badge-caps text-badge-caps uppercase px-2 py-0.5 rounded bg-secondary-container/40 text-secondary font-medium">student</span>
+</td>
+<td class="py-space-md px-space-lg font-label-code-sm text-label-code-sm text-on-surface-variant">
+<span class="text-on-surface">2024-11-11</span> 21:50:33 <span class="text-outline">UTC</span>
+</td>
+<td class="py-space-md px-space-lg text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="inspect-btn p-1 rounded hover:bg-surface-container-highest text-on-surface-variant hover:text-on-surface transition-colors" title="Inspect Raw JSON">
+<span class="material-symbols-outlined text-[18px]">data_object</span>
+</button>
+<button class="delete-btn p-1 rounded hover:bg-error-container/30 text-error hover:text-error transition-colors" title="Delete / Unregister row">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 6 -->
+<tr class="hover:bg-surface-container-high/60 transition-colors group" data-event-id="evt_77d4">
+<td class="py-space-md px-space-lg font-label-code-sm text-label-code-sm text-primary">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-outline">fingerprint</span>
+<span class="hover:underline cursor-pointer" title="Copy UUID">reg_aa39029f</span>
+</div>
+</td>
+<td class="py-space-md px-space-lg">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-secondary flex items-center justify-center font-title-md text-body-sm font-semibold shrink-0">
+                    EK
+                  </div>
+<div class="flex flex-col min-w-0">
+<span class="font-title-md text-body-sm text-on-surface font-medium truncate">Elena Rostova</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant truncate">elena@univ.edu</span>
+</div>
+<span class="font-badge-caps text-badge-caps bg-surface-container-highest text-on-surface-variant px-1.5 py-0.5 rounded font-mono ml-1">usr_88ba2301</span>
+</div>
+</td>
+<td class="py-space-md px-space-lg">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Game Jam 2025: Low Poly Shaders</span>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="font-label-code-sm text-label-code-sm text-secondary">evt_77d46610</span>
+<span class="font-badge-caps text-badge-caps bg-primary/10 text-primary px-1 rounded uppercase">confirmed</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-lg">
+<span class="font-badge-caps text-badge-caps uppercase px-2 py-0.5 rounded bg-secondary-container/40 text-secondary font-medium">student</span>
+</td>
+<td class="py-space-md px-space-lg font-label-code-sm text-label-code-sm text-on-surface-variant">
+<span class="text-on-surface">2024-11-11</span> 18:32:11 <span class="text-outline">UTC</span>
+</td>
+<td class="py-space-md px-space-lg text-right">
+<div class="flex items-center justify-end gap-space-xs">
+<button class="inspect-btn p-1 rounded hover:bg-surface-container-highest text-on-surface-variant hover:text-on-surface transition-colors" title="Inspect Raw JSON">
+<span class="material-symbols-outlined text-[18px]">data_object</span>
+</button>
+<button class="delete-btn p-1 rounded hover:bg-error-container/30 text-error hover:text-error transition-colors" title="Delete / Unregister row">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination & Result Summary Bar -->
+<div class="px-space-lg py-space-md bg-surface-container-low flex flex-col sm:flex-row items-center justify-between gap-space-md text-on-surface-variant font-label-code-sm text-label-code-sm">
+<div class="flex items-center gap-space-sm">
+<span>Displaying <span class="text-on-surface font-medium">1 - 6</span> of <span class="text-on-surface font-medium">892</span> records</span>
+<span class="text-outline">•</span>
+<span>Buffer: 100 rows fetched</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-2.5 py-1 rounded bg-surface-container-high text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest disabled:opacity-40 disabled:cursor-not-allowed" disabled="">
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+</button>
+<span class="px-3 py-1 rounded bg-surface-container-highest text-primary font-medium">1</span>
+<button class="px-3 py-1 rounded hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface">2</button>
+<button class="px-3 py-1 rounded hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface">3</button>
+<span class="px-1 text-outline">...</span>
+<button class="px-3 py-1 rounded hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface">149</button>
+<button class="px-2.5 py-1 rounded bg-surface-container-high text-on-surface hover:bg-surface-container-highest">
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Relational Integrity Inspector Drawer / Footer Card -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-space-md">
+<!-- Relation 1 Info -->
+<div class="bg-surface-container p-space-md rounded-xl flex items-start gap-space-md">
+<div class="p-2 rounded bg-surface-container-high text-primary shrink-0">
+<span class="material-symbols-outlined text-[20px]">account_tree</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-md text-body-sm text-on-surface font-semibold">Foreign Key: student_id</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant mt-0.5">REFERENCES public.users(uuid) ON DELETE CASCADE</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-1">Automatic pruning enabled: deleting a student account will instantly cascade unregister them from events.</span>
+</div>
+</div>
+<!-- Relation 2 Info -->
+<div class="bg-surface-container p-space-md rounded-xl flex items-start gap-space-md">
+<div class="p-2 rounded bg-surface-container-high text-secondary shrink-0">
+<span class="material-symbols-outlined text-[20px]">event_repeat</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-md text-body-sm text-on-surface font-semibold">Foreign Key: event_id</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant mt-0.5">REFERENCES public.events(event_id) ON DELETE CASCADE</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-1">Cancellation hooks: Event capacity is dynamically validated on row insert triggers.</span>
+</div>
+</div>
+<!-- Identity Impersonation Status -->
+<div class="bg-surface-container p-space-md rounded-xl flex items-start gap-space-md">
+<div class="p-2 rounded bg-surface-container-high text-tertiary shrink-0">
+<span class="material-symbols-outlined text-[20px]">badge</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-md text-body-sm text-on-surface font-semibold">Active Impersonation Payload</span>
+<span class="font-label-code-sm text-label-code-sm text-primary mt-0.5">Alex Rivera • usr_9f82d1c4</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-1">Testing mutations without session tokens. Ready to execute SQL INSERT commands directly.</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Raw Record Inspector Flyout Modal (Hidden by Default) -->
+<div class="fixed inset-0 z-50 bg-surface-container-lowest/80 backdrop-blur-md hidden items-center justify-center p-space-md" id="inspector-modal">
+<div class="bg-surface-container-high rounded-xl max-w-xl w-full p-space-lg shadow-2xl flex flex-col gap-space-md relative">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">database</span>
+<span class="font-title-md text-title-md text-on-surface font-semibold">Raw Record Inspector</span>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface p-1 rounded" id="close-inspector">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+        Complete materialized tuple joined from <code class="font-label-code-sm text-label-code-sm text-primary">registrations</code>, <code class="font-label-code-sm text-label-code-sm text-secondary">users</code>, and <code class="font-label-code-sm text-label-code-sm text-tertiary">events</code>.
+      </p>
+<pre class="bg-surface-container-lowest p-space-md rounded-lg font-label-code-sm text-label-code-sm text-primary overflow-x-auto text-xs leading-relaxed max-h-80 shadow-inner" id="json-target">{
+  "id": "reg_81fa940e-7c11-47fa-80e9-b5a044bc1912",
+  "student_id": "usr_4a11b980-32aa-4f3e-9081-01ec7492bd89",
+  "event_id": "evt_99b1fa8a-8401-447b-83ee-5178652d3a90",
+  "created_at": "2024-11-12T14:23:18.491Z",
+  "joined_user": {
+    "name": "Maya Chen",
+    "email": "maya@univ.edu",
+    "role": "student",
+    "major": "Computer Science (Systems)"
+  },
+  "joined_event": {
+    "title": "Hackathon 2025: AI &amp; System Design",
+    "location": "Turing Tech Commons - Grand Hall",
+    "capacity": 150,
+    "current_registrations": 120
+  }
+}
+      </pre>
+<div class="flex justify-end gap-space-sm pt-space-xs">
+<button class="px-space-md py-1.5 rounded bg-surface-container text-on-surface font-label-code-sm text-label-code-sm hover:bg-surface-container-highest flex items-center gap-1 transition-colors" id="btn-copy-json">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+<span>Copy JSON</span>
+</button>
+<button class="px-space-md py-1.5 rounded bg-primary text-on-primary font-body-sm text-body-sm font-medium hover:opacity-90 transition-opacity" id="btn-dismiss-json">
+          Done
+        </button>
+</div>
+</div>
+</div>
+<!-- Quick Register Modal for Currently Switched User -->
+<div class="fixed inset-0 z-50 bg-surface-container-lowest/80 backdrop-blur-md hidden items-center justify-center p-space-md" id="quick-reg-modal">
+<div class="bg-surface-container-high rounded-xl max-w-lg w-full p-space-lg shadow-2xl flex flex-col gap-space-md relative">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[22px]">how_to_reg</span>
+<div>
+<h3 class="font-headline-md text-title-md text-on-surface font-semibold">Immediate Registration</h3>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Simulated Impersonation Injection</span>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface p-1 rounded" id="close-quick-reg">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Impersonation Notice -->
+<div class="p-space-sm rounded bg-surface-container flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<img class="w-7 h-7 rounded-full object-cover" data-alt="Small round user avatar for Alex Rivera in dark theme with teal glow accent" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBg563mxx7J8xevN1DMRdOkjHKFhqv9UbgCf42CwjiGJ_z-OY4WfmNDiWJjhFz_Y_KlaVmG47YjShSCs0f20So-PFqeOFS6v_VCIJJasTopmoZBWi8pCMCdf_rJKlg_pyTVAbj3aqjZ26o4sWWWH3bxUbeuSC8YJID_EHLWQb9eBPFmSQrIO0FeJNWWrJ7OPLyPirPQSogSes8NYUVVWs-rKvulhj7PWrbkTQ0qKs"/>
+<div class="flex flex-col">
+<span class="font-title-md text-body-sm text-on-surface font-medium">Alex Rivera</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">alex@univ.edu (usr_9f82d1c4)</span>
+</div>
+</div>
+<span class="font-badge-caps text-badge-caps bg-primary-container text-on-primary-container px-1.5 py-0.5 rounded uppercase">CURRENT</span>
+</div>
+<!-- Event Choice -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-code-sm text-label-code-sm text-on-surface-variant">Target Event to Register:</label>
+<select class="appearance-none bg-surface-container-lowest text-on-surface px-3 py-2 rounded-lg font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer shadow-inner" id="modal-event-select">
+<option value="evt_99b1">Hackathon 2025: AI &amp; System Design (120/150 seats)</option>
+<option value="evt_33f2">PostgreSQL Workshop: Index Tuning (35/40 seats)</option>
+<option value="evt_84a0">Robotics Open Lab: ROS2 Autonomous Rovers (48/50 seats)</option>
+<option value="evt_12c9">Quantum Computing Campus Forum (28/60 seats)</option>
+<option value="evt_77d4">Game Jam 2025: Low Poly Shaders (85/100 seats)</option>
+</select>
+</div>
+<!-- Simulated DB Mutation preview -->
+<div class="p-space-sm bg-surface-container-lowest rounded-lg font-label-code-sm text-label-code-sm text-on-surface-variant flex flex-col gap-1">
+<div class="flex items-center justify-between text-outline">
+<span>SQL Query Preview:</span>
+<span class="text-primary font-bold">READY</span>
+</div>
+<span class="text-on-surface text-[11px] font-mono leading-tight">
+          INSERT INTO registrations (id, student_id, event_id, created_at)<br/>
+          VALUES (gen_random_uuid(), 'usr_9f82d1c4', <span class="text-secondary" id="sql-event-preview">'evt_99b1'</span>, NOW());
+        </span>
+</div>
+<div class="flex justify-end gap-space-sm pt-space-xs">
+<button class="px-space-md py-1.5 rounded bg-surface-container text-on-surface font-body-sm text-body-sm hover:bg-surface-container-highest transition-colors" id="cancel-quick-reg">
+          Cancel
+        </button>
+<button class="px-space-lg py-1.5 rounded bg-primary text-on-primary font-title-md text-body-sm font-semibold hover:opacity-90 flex items-center gap-1.5 transition-opacity" id="commit-quick-reg">
+<span class="material-symbols-outlined text-[18px]">add_task</span>
+<span>Execute Registration</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Notification Toast Alert -->
+<div class="fixed bottom-6 right-6 z-50 bg-surface-container-high px-space-md py-space-sm rounded-xl shadow-2xl flex items-center gap-space-sm translate-y-24 opacity-0 transition-all duration-300" id="toast-alert">
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface" id="toast-message">Registration record committed to table.</span>
+</div>
+</div>
+<script>
+  // DOM References
+  const searchInput = document.getElementById('search-filter-input');
+  const eventFilter = document.getElementById('event-selector-filter');
+  const tableBody = document.getElementById('roster-tbody');
+  const inspectorModal = document.getElementById('inspector-modal');
+  const closeInspectorBtn = document.getElementById('close-inspector');
+  const dismissJsonBtn = document.getElementById('btn-dismiss-json');
+  const copyJsonBtn = document.getElementById('btn-copy-json');
+  const quickRegModal = document.getElementById('quick-reg-modal');
+  const openQuickRegBtn = document.getElementById('open-quick-reg');
+  const closeQuickRegBtn = document.getElementById('close-quick-reg');
+  const cancelQuickRegBtn = document.getElementById('cancel-quick-reg');
+  const commitQuickRegBtn = document.getElementById('commit-quick-reg');
+  const modalEventSelect = document.getElementById('modal-event-select');
+  const sqlPreview = document.getElementById('sql-event-preview');
+  const toast = document.getElementById('toast-alert');
+  const toastMessage = document.getElementById('toast-message');
+
+  function showToast(msg) {
+    if (!toast) return;
+    toastMessage.textContent = msg;
+    toast.classList.remove('translate-y-24', 'opacity-0');
+    toast.classList.add('translate-y-0', 'opacity-100');
+    setTimeout(() => {
+      toast.classList.remove('translate-y-0', 'opacity-100');
+      toast.classList.add('translate-y-24', 'opacity-0');
+    }, 3200);
+  }
+
+  // Filter Table function
+  function applyFilters() {
+    const query = searchInput.value.toLowerCase().trim();
+    const selectedEvent = eventFilter.value;
+    const rows = tableBody.querySelectorAll('tr');
+
+    rows.forEach(row => {
+      const text = row.innerText.toLowerCase();
+      const eventId = row.getAttribute('data-event-id');
+      const matchesQuery = query === '' || text.includes(query);
+      const matchesEvent = selectedEvent === 'all' || eventId === selectedEvent;
+
+      if (matchesQuery && matchesEvent) {
+        row.style.display = '';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+  }
+
+  if (searchInput) searchInput.addEventListener('input', applyFilters);
+  if (eventFilter) eventFilter.addEventListener('change', applyFilters);
+
+  // Inspector Handlers
+  function openInspector() {
+    if (inspectorModal) inspectorModal.classList.remove('hidden'), inspectorModal.classList.add('flex');
+  }
+  function closeInspector() {
+    if (inspectorModal) inspectorModal.classList.add('hidden'), inspectorModal.classList.remove('flex');
+  }
+
+  document.querySelectorAll('.inspect-btn').forEach(btn => {
+    btn.addEventListener('click', openInspector);
+  });
+  if (closeInspectorBtn) closeInspectorBtn.addEventListener('click', closeInspector);
+  if (dismissJsonBtn) dismissJsonBtn.addEventListener('click', closeInspector);
+
+  if (copyJsonBtn) {
+    copyJsonBtn.addEventListener('click', () => {
+      navigator.clipboard?.writeText(document.getElementById('json-target').innerText);
+      showToast('JSON copied to clipboard');
+    });
+  }
+
+  // Row Delete / Unregister Mutation Handler
+  document.querySelectorAll('.delete-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const row = e.target.closest('tr');
+      const regId = row.querySelector('.text-primary')?.innerText?.trim() || 'Record';
+      row.style.opacity = '0.3';
+      setTimeout(() => {
+        row.remove();
+        showToast(`Record ${regId} unlinked & pruned from DB.`);
+      }, 250);
+    });
+  });
+
+  // Quick Register Modal Handlers
+  if (openQuickRegBtn) {
+    openQuickRegBtn.addEventListener('click', () => {
+      if (quickRegModal) quickRegModal.classList.remove('hidden'), quickRegModal.classList.add('flex');
+    });
+  }
+
+  function closeQuickReg() {
+    if (quickRegModal) quickRegModal.classList.add('hidden'), quickRegModal.classList.remove('flex');
+  }
+
+  if (closeQuickRegBtn) closeQuickRegBtn.addEventListener('click', closeQuickReg);
+  if (cancelQuickRegBtn) cancelQuickRegBtn.addEventListener('click', closeQuickReg);
+
+  if (modalEventSelect) {
+    modalEventSelect.addEventListener('change', () => {
+      sqlPreview.textContent = `'${modalEventSelect.value}'`;
+    });
+  }
+
+  // Keyboard Shortcut: Cmd/Ctrl + R
+  window.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'r') {
+      e.preventDefault();
+      if (quickRegModal) quickRegModal.classList.remove('hidden'), quickRegModal.classList.add('flex');
+    }
+  });
+
+  if (commitQuickRegBtn) {
+    commitQuickRegBtn.addEventListener('click', () => {
+      const selectedEventId = modalEventSelect.value;
+      const selectedEventName = modalEventSelect.options[modalEventSelect.selectedIndex].text.split('(')[0].trim();
+      const newUuid = 'reg_' + Math.random().toString(16).substring(2, 10);
+      const nowUtc = new Date().toISOString().replace('T', ' ').substring(0, 19);
+
+      // Construct and prepend new row
+      const newRow = document.createElement('tr');
+      newRow.className = 'hover:bg-surface-container-high/60 transition-colors group bg-primary/5';
+      newRow.setAttribute('data-event-id', selectedEventId);
+      newRow.innerHTML = `
+        <td class="py-space-md px-space-lg font-label-code-sm text-label-code-sm text-primary">
+          <div class="flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[14px] text-primary animate-pulse">new_releases</span>
+            <span class="hover:underline cursor-pointer font-bold">${newUuid}</span>
+          </div>
+        </td>
+        <td class="py-space-md px-space-lg">
+          <div class="flex items-center gap-space-sm">
+            <img src="placeholder" data-alt="Portrait of Alex Rivera, tech event organizer avatar in sleek dark aesthetic" class="w-8 h-8 rounded-full object-cover shrink-0">
+            <div class="flex flex-col min-w-0">
+              <span class="font-title-md text-body-sm text-on-surface font-medium truncate">Alex Rivera</span>
+              <span class="font-label-code-sm text-label-code-sm text-on-surface-variant truncate">alex@univ.edu</span>
+            </div>
+            <span class="font-badge-caps text-badge-caps bg-surface-container-highest text-on-surface-variant px-1.5 py-0.5 rounded font-mono ml-1">usr_9f82d1c4</span>
+          </div>
+        </td>
+        <td class="py-space-md px-space-lg">
+          <div class="flex flex-col">
+            <span class="font-body-sm text-body-sm text-on-surface font-medium">${selectedEventName}</span>
+            <div class="flex items-center gap-1 text-on-surface-variant">
+              <span class="font-label-code-sm text-label-code-sm text-secondary">${selectedEventId}</span>
+              <span class="font-badge-caps text-badge-caps bg-primary/20 text-primary px-1 rounded uppercase">new</span>
+            </div>
+          </div>
+        </td>
+        <td class="py-space-md px-space-lg">
+          <span class="font-badge-caps text-badge-caps uppercase px-2 py-0.5 rounded bg-primary-container/20 text-primary font-medium">organizer</span>
+        </td>
+        <td class="py-space-md px-space-lg font-label-code-sm text-label-code-sm text-on-surface-variant">
+          <span class="text-on-surface">${nowUtc.split(' ')[0]}</span> ${nowUtc.split(' ')[1]} <span class="text-outline">UTC</span>
+        </td>
+        <td class="py-space-md px-space-lg text-right">
+          <div class="flex items-center justify-end gap-space-xs">
+            <button class="inspect-btn p-1 rounded hover:bg-surface-container-highest text-on-surface-variant hover:text-on-surface transition-colors" title="Inspect Raw JSON">
+              <span class="material-symbols-outlined text-[18px]">data_object</span>
+            </button>
+            <button class="delete-btn p-1 rounded hover:bg-error-container/30 text-error hover:text-error transition-colors" title="Delete / Unregister row">
+              <span class="material-symbols-outlined text-[18px]">delete</span>
+            </button>
+          </div>
+        </td>
+      `;
+
+      // Wire events to newly created row
+      newRow.querySelector('.inspect-btn').addEventListener('click', openInspector);
+      newRow.querySelector('.delete-btn').addEventListener('click', (e) => {
+        const row = e.target.closest('tr');
+        row.remove();
+        showToast('Record pruned from DB.');
+      });
+
+      tableBody.prepend(newRow);
+      closeQuickReg();
+      showToast(`Inserted registration for Alex Rivera into ${selectedEventName}.`);
+    });
+  }
+
+  // Refresh trigger demo
+  const refreshBtn = document.getElementById('refresh-roster-btn');
+  if (refreshBtn) {
+    refreshBtn.addEventListener('click', () => {
+      refreshBtn.classList.add('animate-spin');
+      setTimeout(() => {
+        refreshBtn.classList.remove('animate-spin');
+        showToast('Schema synchronized with PostgreSQL pool.');
+      }, 500);
+    });
+  }
+</script></main><footer class="w-full bg-surface-container-low py-space-lg"><div class="w-full px-margin flex flex-col md:flex-row items-center justify-between gap-space-md text-on-surface-variant font-label-code-sm text-label-code-sm"><div>CampusEvent Engine • Relational Runtime (PostgreSQL Local Pool)</div><div class="flex items-center gap-space-lg"><span class="flex items-center gap-1.5"><span class="h-2 w-2 rounded-full bg-primary"></span>Mock DB Sync Active</span><span>Schema v2.4.0</span></div></div></footer></body></html>

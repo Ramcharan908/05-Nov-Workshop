@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>CampusEvent Engine</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-container-high": "#292a2d", "on-secondary": "#1000a9", "primary": "#4edea3", "surface-tint": "#4edea3", "primary-fixed-dim": "#4edea3", "outline": "#86948a", "inverse-primary": "#006c49", "on-tertiary-fixed-variant": "#653e00", "secondary-fixed-dim": "#c0c1ff", "surface-bright": "#38393c", "on-error-container": "#ffdad6", "tertiary-container": "#e29100", "secondary-fixed": "#e1e0ff", "inverse-surface": "#e3e2e6", "tertiary-fixed": "#ffddb8", "primary-fixed": "#6ffbbe", "on-background": "#e3e2e6", "surface-dim": "#121316", "error-container": "#93000a", "on-primary-container": "#00422b", "outline-variant": "#3c4a42", "secondary-container": "#3131c0", "on-secondary-fixed-variant": "#2f2ebe", "on-surface": "#e3e2e6", "on-surface-variant": "#bbcabf", "surface": "#121316", "on-tertiary-fixed": "#2a1700", "surface-container-lowest": "#0d0e11", "background": "#121316", "surface-container-low": "#1b1b1f", "on-tertiary-container": "#523200", "surface-container-highest": "#343538", "on-primary-fixed": "#002113", "on-error": "#690005", "inverse-on-surface": "#2f3033", "primary-container": "#10b981", "surface-container": "#1f1f23", "on-primary": "#003824", "tertiary": "#ffb95f", "error": "#ffb4ab", "on-tertiary": "#472a00", "surface-variant": "#343538", "on-primary-fixed-variant": "#005236", "tertiary-fixed-dim": "#ffb95f", "secondary": "#c0c1ff", "on-secondary-fixed": "#07006c", "on-secondary-container": "#b0b2ff" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-lg": "1rem", "space-md": "0.75rem", "space-xs": "0.25rem", "space-xl": "1.5rem", "space-sm": "0.5rem", "margin": "1.5rem", "gutter": "1rem" }, "fontFamily": { "headline-md": [ "Inter" ], "body-md": [ "Inter" ], "label-code-sm": [ "JetBrains Mono" ], "headline-xl": [ "Inter" ], "headline-lg": [ "Inter" ], "label-code-md": [ "JetBrains Mono" ], "badge-caps": [ "JetBrains Mono" ], "title-md": [ "Inter" ], "body-sm": [ "Inter" ] }, "fontSize": { "headline-md": [ "20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "body-md": [ "14px", { "lineHeight": "20px", "fontWeight": "400" } ], "label-code-sm": [ "11px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "400" } ], "headline-xl": [ "32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "headline-lg": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "label-code-md": [ "13px", { "lineHeight": "18px", "fontWeight": "500" } ], "badge-caps": [ "10px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "600" } ], "title-md": [ "16px", { "lineHeight": "24px", "fontWeight": "500" } ], "body-sm": [ "13px", { "lineHeight": "18px", "fontWeight": "400" } ] } } } };</script></head><body class="bg-surface-container-lowest font-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-low/90 backdrop-blur-md"><div class="h-16 w-full px-margin flex items-center justify-between gap-gutter"><div class="flex items-center gap-space-md"><a class="flex items-center gap-space-sm" data-path="events-catalog" href="#"><div class="h-8 w-8 rounded-lg bg-surface-container-highest flex items-center justify-center"><span class="material-symbols-outlined text-primary text-[20px]">dataset</span></div><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-headline-md text-headline-md tracking-tight text-on-surface">EventPulse</span><span class="font-badge-caps text-badge-caps uppercase px-1.5 py-0.5 rounded bg-surface-container-highest text-primary">ENGINE</span></div><span class="font-label-code-sm text-label-code-sm text-on-surface-variant flex items-center gap-1"><span class="h-1.5 w-1.5 rounded-full bg-primary animate-pulse"></span>Local Schema Live</span></div></a></div><nav class="hidden xl:flex items-center gap-space-xs bg-surface-container p-1 rounded-xl" data-active-classes="bg-surface-container-high text-on-surface font-title-md"><a class="px-space-md py-1.5 rounded text-on-surface-variant font-body-sm text-body-sm transition-colors hover:text-on-surface hover:bg-surface-container-high" data-path="events-catalog" href="#">Events Catalog</a><a class="px-space-md py-1.5 rounded text-on-surface-variant font-body-sm text-body-sm transition-colors hover:text-on-surface hover:bg-surface-container-high" data-path="manage-and-create-events" href="#">Manage &amp; Create Events</a><a class="px-space-md py-1.5 rounded text-on-surface-variant font-body-sm text-body-sm transition-colors hover:text-on-surface hover:bg-surface-container-high" data-path="registrations-and-attendees" href="#">Registrations &amp; Attendees</a><a class="px-space-md py-1.5 rounded text-on-surface-variant font-body-sm text-body-sm transition-colors hover:text-on-surface hover:bg-surface-container-high" data-path="database-schema-viewer" href="#">Database Schema Viewer</a></nav><div class="flex items-center gap-space-md"><div class="hidden md:flex items-center bg-surface-container px-space-md py-1 rounded-lg text-on-surface-variant gap-space-sm"><span class="material-symbols-outlined text-[18px]">search</span><span class="font-body-sm text-body-sm">Search entities...</span><kbd class="font-label-code-sm text-label-code-sm bg-surface-container-highest px-1.5 py-0.5 rounded text-on-surface">⌘K</kbd></div><button class="h-8 w-8 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span></button><div class="relative group"><div class="flex items-center gap-space-sm bg-surface-container hover:bg-surface-container-high px-space-md py-1 rounded-xl cursor-pointer transition-all"><div class="flex flex-col text-right"><div class="flex items-center justify-end gap-space-xs"><span class="font-body-sm text-body-sm text-on-surface font-medium">Alex Rivera</span><span class="font-badge-caps text-badge-caps bg-primary-container/20 text-primary px-1 rounded uppercase">organizer</span></div><span class="font-label-code-sm text-label-code-sm text-on-surface-variant truncate max-w-[140px]">alex@univ.edu</span></div><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1X8n6S8otyJBqFpxm_xnTJ-M0w_btPmW9bUjhd3yckijY6eutpPHHGu1bLtBxhtYWzmgdbA_RzzMjOSEr06ycQiq3nsFXwx8BWTOLyxX4asljw28AGh9fIL9B7EKGPIyUSkI02KXcCOuJh-PDiffpBGoDs4skhOVwJVe6Sm2GJce-UAEUd0ykkoBvJNngOQvv1ywa8VIChZa5Fk-GD8L4EquffPC5SzIHJEn-u2qUuh"/><span class="material-symbols-outlined text-on-surface-variant text-[18px]">expand_more</span></div><div class="absolute right-0 top-full mt-2 w-80 bg-surface-container-high rounded-xl p-space-sm shadow-[0_12px_32px_rgba(0,0,0,0.6)] hidden group-hover:block z-50"><div class="px-space-sm py-1 mb-1 flex items-center justify-between"><span class="font-badge-caps text-badge-caps uppercase tracking-wider text-on-surface-variant">Simulated User Context</span><span class="font-label-code-sm text-label-code-sm text-primary flex items-center gap-1"><span class="h-1.5 w-1.5 rounded-full bg-primary"></span>No-Auth Mode</span></div><div class="flex flex-col gap-1"><div class="p-space-sm rounded bg-surface-container flex items-center justify-between cursor-pointer"><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-body-sm text-body-sm text-on-surface font-medium">Alex Rivera</span><span class="font-badge-caps text-badge-caps bg-primary-container text-on-primary-container px-1 rounded uppercase">active</span></div><span class="font-label-code-sm text-label-code-sm text-on-surface-variant">alex@univ.edu</span><span class="font-label-code-sm text-label-code-sm text-on-surface-variant">uuid: usr_9f82d1c4</span></div><span class="material-symbols-outlined text-primary text-[18px]">check_circle</span></div><div class="p-space-sm rounded hover:bg-surface-container flex items-center justify-between cursor-pointer transition-colors"><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-body-sm text-body-sm text-on-surface font-medium">Maya Chen</span><span class="font-badge-caps text-badge-caps bg-secondary-container/40 text-secondary px-1 rounded uppercase">student</span></div><span class="font-label-code-sm text-label-code-sm text-on-surface-variant">maya@univ.edu</span><span class="font-label-code-sm text-label-code-sm text-on-surface-variant">uuid: usr_4a11b980</span></div><span class="material-symbols-outlined text-on-surface-variant text-[18px]">swap_horiz</span></div><div class="p-space-sm rounded hover:bg-surface-container flex items-center justify-between cursor-pointer transition-colors"><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-body-sm text-body-sm text-on-surface font-medium">Marcus Brody</span><span class="font-badge-caps text-badge-caps bg-tertiary-container/30 text-tertiary px-1 rounded uppercase">admin</span></div><span class="font-label-code-sm text-label-code-sm text-on-surface-variant">marcus@univ.edu</span><span class="font-label-code-sm text-label-code-sm text-on-surface-variant">uuid: usr_7c34ea12</span></div><span class="material-symbols-outlined text-on-surface-variant text-[18px]">swap_horiz</span></div></div></div></div></div></div></header><main class="w-full pt-16 bg-surface-container-lowest min-h-screen"><div class="flex flex-col w-full">
+<!-- Subtle Dot Grid Ambient Layer -->
+<div class="relative w-full px-margin py-space-xl flex flex-col gap-space-xl">
+<!-- Top Meta Breadcrumb & Quick Actions Bar -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-code-sm text-label-code-sm">
+<span class="flex items-center gap-1 hover:text-on-surface transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-[16px]">database</span>
+<span>schema_public</span>
+</span>
+<span>/</span>
+<span class="hover:text-on-surface transition-colors cursor-pointer">tables</span>
+<span>/</span>
+<span class="text-primary font-medium flex items-center gap-1">
+<span class="h-1.5 w-1.5 rounded-full bg-primary"></span>
+            events
+          </span>
+<span class="ml-space-xs px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-badge-caps text-badge-caps">RELATIONAL WRITE</span>
+</div>
+<div class="flex items-center gap-space-sm mt-1">
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Event Records Management</h1>
+<span class="px-2 py-0.5 rounded-lg bg-surface-container-high text-on-surface-variant font-label-code-sm text-label-code-sm">table_rows: 28</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm flex-wrap">
+<!-- Direct Jump Modal / Insert Drawer Trigger -->
+<button class="h-9 px-space-md rounded-xl bg-surface-container-high hover:bg-surface-bright text-on-surface font-title-md text-title-md flex items-center gap-space-xs shadow-sm transition-all" id="quick-dml-btn">
+<span class="material-symbols-outlined text-[18px] text-tertiary">code</span>
+<span>SQL Console</span>
+<kbd class="font-label-code-sm text-label-code-sm bg-surface-container px-1 rounded text-on-surface-variant">⌥S</kbd>
+</button>
+<div class="h-6 w-px bg-surface-container-highest"></div>
+<button class="h-9 px-space-md rounded-xl bg-primary text-on-primary font-title-md text-title-md flex items-center gap-space-xs shadow-sm hover:brightness-105 active:scale-[0.98] transition-all" id="trigger-insert-focus">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>New Event Entity</span>
+<kbd class="font-label-code-sm text-label-code-sm bg-on-primary/20 text-on-primary px-1 rounded">⌘N</kbd>
+</button>
+</div>
+</div>
+<!-- Asymmetric Top Workspace: Form & Runtime Pipeline Simulator -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- Primary Data Write Form ("Insert into events table") -->
+<section class="lg:col-span-7 bg-surface-container rounded-xl p-space-lg shadow-md flex flex-col gap-space-md" id="event-form-container">
+<!-- Card Header -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="h-7 w-7 rounded-lg bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[18px]">edit_square</span>
+</div>
+<div>
+<div class="font-title-md text-title-md text-on-surface">INSERT INTO 'events'</div>
+<div class="font-label-code-sm text-label-code-sm text-on-surface-variant">Transactional row formulation payload</div>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-primary font-label-code-sm text-label-code-sm flex items-center gap-1">
+<span class="h-1.5 w-1.5 rounded-full bg-primary"></span>
+              AUTOCOMMIT
+            </span>
+</div>
+</div>
+<form class="flex flex-col gap-space-md mt-space-xs" id="create-event-form" onsubmit="return false;">
+<!-- Field: Event Title -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<label class="font-label-code-md text-label-code-md text-on-surface flex items-center gap-1.5">
+<span class="text-primary font-bold">varchar</span>
+<span>title</span>
+<span class="text-tertiary text-[12px]">*</span>
+</label>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">max 128 chars</span>
+</div>
+<div class="relative">
+<input class="w-full h-10 px-space-md rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md placeholder:text-on-surface-variant/50 focus:outline-none focus:ring-1 focus:ring-primary shadow-sm" id="event-title-input" placeholder="e.g. Distributed Database Engineering Summit" type="text" value="Advanced Cloud Systems Workshop &amp; Hackathon"/>
+<span class="absolute right-3 top-2.5 material-symbols-outlined text-[18px] text-on-surface-variant">title</span>
+</div>
+</div>
+<!-- Dual Columns: Capacity & Timestamptz -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<!-- Capacity Stepper -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<label class="font-label-code-md text-label-code-md text-on-surface flex items-center gap-1.5">
+<span class="text-secondary font-bold">int4</span>
+<span>capacity</span>
+<span class="text-tertiary text-[12px]">*</span>
+</label>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">min: 1 | max: 5000</span>
+</div>
+<div class="flex items-center h-10 rounded-lg bg-surface-container-lowest overflow-hidden shadow-sm">
+<button class="h-full px-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors flex items-center justify-center" id="cap-dec" type="button">
+<span class="material-symbols-outlined text-[16px]">remove</span>
+</button>
+<input class="w-full h-full text-center bg-transparent text-on-surface font-label-code-md text-label-code-md focus:outline-none" id="event-capacity-input" max="5000" min="1" type="number" value="120"/>
+<button class="h-full px-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors flex items-center justify-center" id="cap-inc" type="button">
+<span class="material-symbols-outlined text-[16px]">add</span>
+</button>
+</div>
+</div>
+<!-- Timestamp (Read-only Expression) -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<label class="font-label-code-md text-label-code-md text-on-surface flex items-center gap-1.5">
+<span class="text-tertiary font-bold">timestamptz</span>
+<span>created_at</span>
+</label>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">default: now()</span>
+</div>
+<div class="h-10 px-space-md rounded-lg bg-surface-container-lowest text-on-surface-variant font-label-code-sm text-label-code-sm flex items-center justify-between shadow-sm">
+<span id="current-timestamp-preview">2025-05-18T14:32:00.412Z</span>
+<span class="material-symbols-outlined text-[16px] text-tertiary">schedule</span>
+</div>
+</div>
+</div>
+<!-- Dual Columns: Student/Creator UUID & Auto ID -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<!-- Student/Creator Foreign Key -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<label class="font-label-code-md text-label-code-md text-on-surface flex items-center gap-1.5">
+<span class="text-secondary font-bold">fk_uuid</span>
+<span>student_id</span>
+</label>
+<span class="font-label-code-sm text-label-code-sm text-primary">active session</span>
+</div>
+<div class="h-10 px-space-md rounded-lg bg-surface-container-lowest flex items-center justify-between text-on-surface font-label-code-sm text-label-code-sm shadow-sm">
+<div class="flex items-center gap-1.5 truncate">
+<span class="material-symbols-outlined text-[16px] text-secondary">vpn_key</span>
+<span class="text-on-surface font-medium truncate">usr_9f82d1c4</span>
+<span class="text-on-surface-variant truncate">(Alex Rivera)</span>
+</div>
+<span class="font-badge-caps text-badge-caps px-1 py-0.5 rounded bg-surface-container-highest text-secondary">IMMUTABLE</span>
+</div>
+</div>
+<!-- Generated Primary Key -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<label class="font-label-code-md text-label-code-md text-on-surface flex items-center gap-1.5">
+<span class="text-primary font-bold">pk_uuid</span>
+<span>event_id</span>
+</label>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">v4 sequence</span>
+</div>
+<div class="h-10 px-space-md rounded-lg bg-surface-container-lowest flex items-center justify-between text-on-surface-variant font-label-code-sm text-label-code-sm shadow-sm">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary">fingerprint</span>
+<span class="text-primary" id="preview-event-uuid">uuid_v4() [dynamic]</span>
+</div>
+<button class="hover:text-on-surface transition-colors p-1" id="regen-uuid-btn" title="Test new UUID generation" type="button">
+<span class="material-symbols-outlined text-[16px]">sync</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Buttons Bar -->
+<div class="pt-space-sm flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-space-sm">
+<button class="h-9 px-space-md rounded-xl bg-surface-container-highest hover:bg-surface-bright text-on-surface font-label-code-sm text-label-code-sm flex items-center justify-center gap-space-xs transition-colors" id="toggle-sql-btn" type="button">
+<span class="material-symbols-outlined text-[16px] text-secondary">terminal</span>
+<span id="toggle-sql-label">Hide SQL Statement</span>
+</button>
+<div class="flex items-center gap-space-sm">
+<button class="flex-1 sm:flex-initial h-9 px-space-md rounded-xl bg-surface-container-high hover:bg-surface-bright text-on-surface-variant hover:text-on-surface font-title-md text-title-md transition-colors" id="draft-event-btn" type="button">
+                Save Draft
+              </button>
+<button class="flex-1 sm:flex-initial h-9 px-space-lg rounded-xl bg-primary text-on-primary font-title-md text-title-md flex items-center justify-center gap-space-xs shadow-md hover:brightness-105 active:scale-[0.98] transition-all" id="publish-event-btn" type="button">
+<span class="material-symbols-outlined text-[18px]">cloud_upload</span>
+<span>Commit &amp; Publish</span>
+</button>
+</div>
+</div>
+</form>
+</section>
+<!-- Right Column: Visual DDL/DML Terminal & Database Entity Metadata -->
+<section class="lg:col-span-5 flex flex-col gap-space-md">
+<!-- Live SQL Simulation Terminal -->
+<div class="bg-surface-container rounded-xl p-space-md shadow-md flex flex-col gap-space-sm" id="sql-terminal-box">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<div class="h-2.5 w-2.5 rounded-full bg-error"></div>
+<div class="h-2.5 w-2.5 rounded-full bg-tertiary"></div>
+<div class="h-2.5 w-2.5 rounded-full bg-primary"></div>
+<span class="ml-space-xs font-label-code-sm text-label-code-sm text-on-surface-variant">runtime_pool.psql</span>
+</div>
+<button class="h-6 px-2 rounded bg-surface-container-highest hover:bg-surface-bright text-on-surface-variant hover:text-on-surface font-label-code-sm text-label-code-sm flex items-center gap-1 transition-colors" id="copy-sql-btn">
+<span class="material-symbols-outlined text-[13px]">content_copy</span>
+<span>Copy</span>
+</button>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-lowest font-label-code-sm text-label-code-sm text-on-surface overflow-x-auto leading-relaxed">
+<div class="text-on-surface-variant">-- Prepared Prepared Execution Graph</div>
+<div class="mt-1">
+<span class="text-tertiary font-semibold">INSERT INTO</span> <span class="text-primary font-semibold">public.events</span> (
+            </div>
+<div class="pl-4 text-on-surface-variant">
+              event_id, student_id, title, capacity, created_at
+            </div>
+<div>
+<span class="text-tertiary font-semibold">VALUES</span> (
+            </div>
+<div class="pl-4 font-mono text-secondary" id="sql-values-preview">
+              gen_random_uuid(),<br/>
+              'usr_9f82d1c4',<br/>
+              '<span class="text-on-surface" id="sql-title-val">Advanced Cloud Systems Workshop &amp; Hackathon</span>',<br/>
+<span class="text-primary" id="sql-cap-val">120</span>,<br/>
+              NOW()
+            </div>
+<div>);</div>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-label-code-sm text-label-code-sm pt-1">
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[15px]">verified</span>
+<span>Foreign Key Validated (usr_9f82d1c4)</span>
+</div>
+<span>Cost: 0.02ms</span>
+</div>
+</div>
+<!-- Schema Relation Health Card & Inline Sparkline Metric -->
+<div class="bg-surface-container rounded-xl p-space-md shadow-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">schema</span>
+<span class="font-title-md text-title-md text-on-surface">Constraint Monitor</span>
+</div>
+<span class="font-badge-caps text-badge-caps text-on-surface-variant">CASCADE: ACTIVE</span>
+</div>
+<div class="grid grid-cols-3 gap-space-xs pt-1 text-center">
+<div class="p-2 rounded-lg bg-surface-container-lowest flex flex-col">
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Max Events/User</span>
+<span class="font-headline-md text-headline-md text-on-surface mt-0.5">25</span>
+<span class="font-label-code-sm text-label-code-sm text-primary">4 / 25 Used</span>
+</div>
+<div class="p-2 rounded-lg bg-surface-container-lowest flex flex-col">
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Global Cap Ratio</span>
+<span class="font-headline-md text-headline-md text-on-surface mt-0.5">84.2%</span>
+<span class="font-label-code-sm text-label-code-sm text-tertiary">3 Strain</span>
+</div>
+<div class="p-2 rounded-lg bg-surface-container-lowest flex flex-col">
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Cascade Rows</span>
+<span class="font-headline-md text-headline-md text-on-surface mt-0.5">142</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">registrations</span>
+</div>
+</div>
+<!-- Inline Capacity Health Sparkline SVG -->
+<div class="p-space-sm rounded-lg bg-surface-container-lowest flex items-center justify-between gap-space-md">
+<div class="flex flex-col">
+<span class="font-label-code-sm text-label-code-sm text-on-surface">Capacity Velocity</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">7-day RSVP cadence</span>
+</div>
+<div class="w-36 h-9 flex items-center">
+<svg class="w-full h-full text-primary" fill="none" preserveaspectratio="none" viewbox="0 0 120 30">
+<path d="M0 24 L20 18 L40 22 L60 12 L80 14 L100 6 L120 2" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M0 24 L20 18 L40 22 L60 12 L80 14 L100 6 L120 2 L120 30 L0 30 Z" fill="currentColor" fill-opacity="0.08"></path>
+</svg>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Management Data Grid ("All Managed Events") -->
+<section class="w-full bg-surface-container rounded-xl shadow-md flex flex-col overflow-hidden">
+<!-- Table Header & Filter Toolbar -->
+<div class="p-space-lg flex flex-col lg:flex-row lg:items-center justify-between gap-space-md bg-surface-container">
+<div class="flex items-center gap-space-sm">
+<div class="h-8 w-8 rounded-lg bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[20px]">table_rows</span>
+</div>
+<div>
+<div class="flex items-center gap-space-sm">
+<h2 class="font-title-md text-title-md text-on-surface font-semibold">Managed Campus Events</h2>
+<span class="font-label-code-sm text-label-code-sm px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant" id="event-counter-pill">4 active items</span>
+</div>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Real-time table view synced with Postgres local instance</span>
+</div>
+</div>
+<!-- Filter & Batch Action Buttons -->
+<div class="flex items-center gap-space-sm flex-wrap">
+<div class="relative flex-1 sm:w-64">
+<input class="w-full h-8 pl-8 pr-space-sm rounded-lg bg-surface-container-lowest text-on-surface font-body-sm text-body-sm placeholder:text-on-surface-variant/50 focus:outline-none focus:ring-1 focus:ring-primary shadow-sm" id="table-search-input" placeholder="Search UUID or Title..." type="text"/>
+<span class="absolute left-2.5 top-2 material-symbols-outlined text-[16px] text-on-surface-variant">search</span>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-lowest p-1 rounded-lg">
+<button class="h-7 px-2.5 rounded bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-code-sm text-label-code-sm flex items-center gap-1 transition-colors" id="export-json-btn">
+<span class="material-symbols-outlined text-[14px] text-secondary">data_object</span>
+<span>JSON</span>
+</button>
+<button class="h-7 px-2.5 rounded hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-code-sm text-label-code-sm flex items-center gap-1 transition-colors" id="export-csv-btn">
+<span class="material-symbols-outlined text-[14px] text-tertiary">table_chart</span>
+<span>CSV</span>
+</button>
+</div>
+<button class="h-8 w-8 rounded-lg bg-surface-container-lowest hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface flex items-center justify-center transition-colors" id="refresh-table-btn" title="Force Reload Table">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+</button>
+</div>
+</div>
+<!-- Relational Data Table Container -->
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left font-body-sm text-body-sm">
+<thead class="bg-surface-container-high text-on-surface-variant font-label-code-sm text-label-code-sm uppercase tracking-wider">
+<tr>
+<th class="py-2.5 px-space-md" scope="col">event_id (uuid)</th>
+<th class="py-2.5 px-space-md min-w-[220px]" scope="col">Title</th>
+<th class="py-2.5 px-space-md" scope="col">student_id (organizer)</th>
+<th class="py-2.5 px-space-md min-w-[190px]" scope="col">Capacity (Registered / Cap)</th>
+<th class="py-2.5 px-space-md" scope="col">created_at</th>
+<th class="py-2.5 px-space-md text-right" scope="col">Actions</th>
+</tr>
+</thead>
+<tbody class="bg-surface-container" id="events-table-body">
+<!-- Row 1: High strain (>90%) -->
+<tr class="hover:bg-surface-container-high/60 transition-colors group">
+<td class="py-3 px-space-md font-label-code-sm text-label-code-sm text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="text-on-surface font-mono">e83f0a12...</span>
+<button class="opacity-0 group-hover:opacity-100 hover:text-primary transition-opacity text-on-surface-variant" onclick="navigator.clipboard.writeText('e83f0a12-881b-41f2-95f6-cbb105e61280')" title="Copy UUID">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+</button>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-on-surface font-medium truncate max-w-xs">AI Research Symposium &amp; Labs Showcase</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Auditorium B • Engineering Wing</span>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<div class="flex items-center gap-2">
+<span class="h-6 w-6 rounded-full bg-secondary-container/40 text-secondary flex items-center justify-center font-label-code-sm text-label-code-sm font-bold">AR</span>
+<div class="flex flex-col">
+<span class="text-on-surface font-medium">Alex Rivera</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">usr_9f82d1c4</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<div class="flex flex-col gap-1 w-full max-w-[200px]">
+<div class="flex items-center justify-between font-label-code-sm text-label-code-sm">
+<span class="text-tertiary font-bold">192 / 200</span>
+<span class="px-1.5 py-0.2 rounded bg-tertiary-container/30 text-tertiary font-badge-caps text-badge-caps flex items-center gap-1">
+<span class="h-1 w-1 rounded-full bg-tertiary"></span>
+                      96% STRAIN
+                    </span>
+</div>
+<div class="w-full h-1.5 rounded-full bg-surface-container-lowest overflow-hidden">
+<div class="h-full bg-tertiary rounded-full" style="width: 96%"></div>
+</div>
+</div>
+</td>
+<td class="py-3 px-space-md font-label-code-sm text-label-code-sm text-on-surface-variant">
+<div>2025-05-12</div>
+<div class="text-[10px] text-on-surface-variant/70">10:14:02 UTC</div>
+</td>
+<td class="py-3 px-space-md text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="h-7 w-7 rounded bg-surface-container-highest hover:bg-surface-bright text-on-surface-variant hover:text-on-surface flex items-center justify-center transition-colors" title="Manage Registrations">
+<span class="material-symbols-outlined text-[16px]">groups</span>
+</button>
+<button class="h-7 w-7 rounded bg-surface-container-highest hover:bg-surface-bright text-on-surface-variant hover:text-on-surface flex items-center justify-center transition-colors" title="Edit Event Row">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+</button>
+<button class="h-7 w-7 rounded bg-surface-container-highest hover:bg-error-container text-on-surface-variant hover:text-error flex items-center justify-center transition-colors" title="Delete &amp; Cascade">
+<span class="material-symbols-outlined text-[16px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2: Standard Healthy -->
+<tr class="hover:bg-surface-container-high/60 transition-colors group">
+<td class="py-3 px-space-md font-label-code-sm text-label-code-sm text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="text-on-surface font-mono">c42b89fa...</span>
+<button class="opacity-0 group-hover:opacity-100 hover:text-primary transition-opacity text-on-surface-variant" onclick="navigator.clipboard.writeText('c42b89fa-710d-407b-801e-7b774fa191b9')" title="Copy UUID">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+</button>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-on-surface font-medium truncate max-w-xs">Fullstack React &amp; Next.js Bootcamp</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Turing Hall • Computer Science Dept</span>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<div class="flex items-center gap-2">
+<span class="h-6 w-6 rounded-full bg-secondary-container/40 text-secondary flex items-center justify-center font-label-code-sm text-label-code-sm font-bold">AR</span>
+<div class="flex flex-col">
+<span class="text-on-surface font-medium">Alex Rivera</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">usr_9f82d1c4</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<div class="flex flex-col gap-1 w-full max-w-[200px]">
+<div class="flex items-center justify-between font-label-code-sm text-label-code-sm">
+<span class="text-on-surface">45 / 80</span>
+<span class="text-on-surface-variant font-badge-caps text-badge-caps">56% FULL</span>
+</div>
+<div class="w-full h-1.5 rounded-full bg-surface-container-lowest overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 56.25%"></div>
+</div>
+</div>
+</td>
+<td class="py-3 px-space-md font-label-code-sm text-label-code-sm text-on-surface-variant">
+<div>2025-05-14</div>
+<div class="text-[10px] text-on-surface-variant/70">16:45:18 UTC</div>
+</td>
+<td class="py-3 px-space-md text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="h-7 w-7 rounded bg-surface-container-highest hover:bg-surface-bright text-on-surface-variant hover:text-on-surface flex items-center justify-center transition-colors" title="Manage Registrations">
+<span class="material-symbols-outlined text-[16px]">groups</span>
+</button>
+<button class="h-7 w-7 rounded bg-surface-container-highest hover:bg-surface-bright text-on-surface-variant hover:text-on-surface flex items-center justify-center transition-colors" title="Edit Event Row">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+</button>
+<button class="h-7 w-7 rounded bg-surface-container-highest hover:bg-error-container text-on-surface-variant hover:text-error flex items-center justify-center transition-colors" title="Delete &amp; Cascade">
+<span class="material-symbols-outlined text-[16px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3: Near Full Capacity -->
+<tr class="hover:bg-surface-container-high/60 transition-colors group">
+<td class="py-3 px-space-md font-label-code-sm text-label-code-sm text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="text-on-surface font-mono">910d54cc...</span>
+<button class="opacity-0 group-hover:opacity-100 hover:text-primary transition-opacity text-on-surface-variant" onclick="navigator.clipboard.writeText('910d54cc-39ac-4521-82ef-5079a42f6aa1')" title="Copy UUID">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+</button>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-on-surface font-medium truncate max-w-xs">Campus Cybersecurity CTF Challenge</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Cyber Range 304</span>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<div class="flex items-center gap-2">
+<span class="h-6 w-6 rounded-full bg-secondary-container/40 text-secondary flex items-center justify-center font-label-code-sm text-label-code-sm font-bold">MC</span>
+<div class="flex flex-col">
+<span class="text-on-surface font-medium">Maya Chen</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">usr_4a11b980</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<div class="flex flex-col gap-1 w-full max-w-[200px]">
+<div class="flex items-center justify-between font-label-code-sm text-label-code-sm">
+<span class="text-tertiary font-bold">48 / 50</span>
+<span class="px-1.5 py-0.2 rounded bg-tertiary-container/30 text-tertiary font-badge-caps text-badge-caps flex items-center gap-1">
+<span class="h-1 w-1 rounded-full bg-tertiary"></span>
+                      96% CRITICAL
+                    </span>
+</div>
+<div class="w-full h-1.5 rounded-full bg-surface-container-lowest overflow-hidden">
+<div class="h-full bg-tertiary rounded-full" style="width: 96%"></div>
+</div>
+</div>
+</td>
+<td class="py-3 px-space-md font-label-code-sm text-label-code-sm text-on-surface-variant">
+<div>2025-05-16</div>
+<div class="text-[10px] text-on-surface-variant/70">08:00:44 UTC</div>
+</td>
+<td class="py-3 px-space-md text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="h-7 w-7 rounded bg-surface-container-highest hover:bg-surface-bright text-on-surface-variant hover:text-on-surface flex items-center justify-center transition-colors" title="Manage Registrations">
+<span class="material-symbols-outlined text-[16px]">groups</span>
+</button>
+<button class="h-7 w-7 rounded bg-surface-container-highest hover:bg-surface-bright text-on-surface-variant hover:text-on-surface flex items-center justify-center transition-colors" title="Edit Event Row">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+</button>
+<button class="h-7 w-7 rounded bg-surface-container-highest hover:bg-error-container text-on-surface-variant hover:text-error flex items-center justify-center transition-colors" title="Delete &amp; Cascade">
+<span class="material-symbols-outlined text-[16px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4: Newly Launched Event -->
+<tr class="hover:bg-surface-container-high/60 transition-colors group">
+<td class="py-3 px-space-md font-label-code-sm text-label-code-sm text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="text-on-surface font-mono">18d407bb...</span>
+<button class="opacity-0 group-hover:opacity-100 hover:text-primary transition-opacity text-on-surface-variant" onclick="navigator.clipboard.writeText('18d407bb-0021-4f81-9b12-920800bce491')" title="Copy UUID">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+</button>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-on-surface font-medium truncate max-w-xs">Hardware Hacker Faire &amp; IoT Demo</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Makerspace Floor 1</span>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<div class="flex items-center gap-2">
+<span class="h-6 w-6 rounded-full bg-secondary-container/40 text-secondary flex items-center justify-center font-label-code-sm text-label-code-sm font-bold">MB</span>
+<div class="flex flex-col">
+<span class="text-on-surface font-medium">Marcus Brody</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">usr_7c34ea12</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-space-md">
+<div class="flex flex-col gap-1 w-full max-w-[200px]">
+<div class="flex items-center justify-between font-label-code-sm text-label-code-sm">
+<span class="text-on-surface">12 / 150</span>
+<span class="text-primary font-badge-caps text-badge-caps">8% OPEN</span>
+</div>
+<div class="w-full h-1.5 rounded-full bg-surface-container-lowest overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 8%"></div>
+</div>
+</div>
+</td>
+<td class="py-3 px-space-md font-label-code-sm text-label-code-sm text-on-surface-variant">
+<div>2025-05-17</div>
+<div class="text-[10px] text-on-surface-variant/70">19:12:10 UTC</div>
+</td>
+<td class="py-3 px-space-md text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="h-7 w-7 rounded bg-surface-container-highest hover:bg-surface-bright text-on-surface-variant hover:text-on-surface flex items-center justify-center transition-colors" title="Manage Registrations">
+<span class="material-symbols-outlined text-[16px]">groups</span>
+</button>
+<button class="h-7 w-7 rounded bg-surface-container-highest hover:bg-surface-bright text-on-surface-variant hover:text-on-surface flex items-center justify-center transition-colors" title="Edit Event Row">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+</button>
+<button class="h-7 w-7 rounded bg-surface-container-highest hover:bg-error-container text-on-surface-variant hover:text-error flex items-center justify-center transition-colors" title="Delete &amp; Cascade">
+<span class="material-symbols-outlined text-[16px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Empty State Simulator (Hidden by default, triggered if user clears query) -->
+<div class="hidden p-space-xl flex-col items-center justify-center text-center gap-space-sm bg-surface-container" id="table-empty-state">
+<div class="h-12 w-12 rounded-xl bg-surface-container-highest flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[28px]">search_off</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-on-surface">No Event Tuples Located</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Zero rows match the current relation query or search parameter.</span>
+</div>
+<button class="h-8 px-space-md rounded-lg bg-surface-container-highest text-primary font-label-code-sm text-label-code-sm hover:bg-surface-bright transition-colors" id="reset-filter-btn">
+          Reset Filter / SELECT *
+        </button>
+</div>
+<!-- Table Footer Metadata & Pagination Bar -->
+<div class="p-space-md bg-surface-container-low flex flex-col sm:flex-row items-center justify-between gap-space-sm font-label-code-sm text-label-code-sm text-on-surface-variant">
+<div class="flex items-center gap-space-md">
+<span>Showing 4 of 28 rows</span>
+<span class="h-1 w-1 rounded-full bg-on-surface-variant"></span>
+<span>Index Scan: <code class="text-primary">idx_events_student_id</code></span>
+</div>
+<div class="flex items-center gap-1">
+<button class="h-7 px-2.5 rounded bg-surface-container text-on-surface-variant hover:text-on-surface disabled:opacity-40" disabled="">
+            Previous
+          </button>
+<span class="px-2 text-on-surface">Page 1 of 7</span>
+<button class="h-7 px-2.5 rounded bg-surface-container hover:bg-surface-container-highest text-on-surface transition-colors">
+            Next
+          </button>
+</div>
+</div>
+</section>
+<!-- Schema Relation Diagnostic Ribbon -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-[20px]">account_tree</span>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-on-surface">Referential Integrity Status</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">
+            Foreign Key <code class="text-on-surface">events.student_id → users.student_id</code> with ON DELETE CASCADE enabled.
+          </span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs font-label-code-sm text-label-code-sm">
+<span class="px-2 py-1 rounded bg-surface-container text-on-surface">Engine: Postgres 16.2</span>
+<span class="px-2 py-1 rounded bg-surface-container text-primary">Isolation: Read Committed</span>
+</div>
+</div>
+</div>
+<!-- Notification Toast Container -->
+<div class="fixed bottom-6 right-6 z-50 flex flex-col gap-2 pointer-events-none" id="toast-container"></div>
+</div>
+<script>
+  (function() {
+    // Generate UUID mock helper
+    function generateUUID() {
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+      });
+    }
+
+    // Input elements
+    const titleInput = document.getElementById('event-title-input');
+    const capInput = document.getElementById('event-capacity-input');
+    const sqlTitleVal = document.getElementById('sql-title-val');
+    const sqlCapVal = document.getElementById('sql-cap-val');
+    const capInc = document.getElementById('cap-inc');
+    const capDec = document.getElementById('cap-dec');
+    const regenUuidBtn = document.getElementById('regen-uuid-btn');
+    const previewUuid = document.getElementById('preview-event-uuid');
+    const toggleSqlBtn = document.getElementById('toggle-sql-btn');
+    const toggleSqlLabel = document.getElementById('toggle-sql-label');
+    const sqlTerminalBox = document.getElementById('sql-terminal-box');
+    const copySqlBtn = document.getElementById('copy-sql-btn');
+    const publishBtn = document.getElementById('publish-event-btn');
+    const draftBtn = document.getElementById('draft-event-btn');
+    const quickDmlBtn = document.getElementById('quick-dml-btn');
+    const triggerFocusBtn = document.getElementById('trigger-insert-focus');
+    const searchInput = document.getElementById('table-search-input');
+    const tableBody = document.getElementById('events-table-body');
+    const emptyState = document.getElementById('table-empty-state');
+    const resetFilterBtn = document.getElementById('reset-filter-btn');
+    const toastContainer = document.getElementById('toast-container');
+    const exportJsonBtn = document.getElementById('export-json-btn');
+    const exportCsvBtn = document.getElementById('export-csv-btn');
+
+    // Live SQL Preview syncing
+    function updateSQL() {
+      if (titleInput && sqlTitleVal) {
+        sqlTitleVal.textContent = titleInput.value.trim() || '[empty_string]';
+      }
+      if (capInput && sqlCapVal) {
+        sqlCapVal.textContent = capInput.value || '100';
+      }
+    }
+
+    if (titleInput) {
+      titleInput.addEventListener('input', updateSQL);
+    }
+
+    if (capInput) {
+      capInput.addEventListener('input', function() {
+        if (parseInt(this.value, 10) < 1) this.value = 1;
+        if (parseInt(this.value, 10) > 5000) this.value = 5000;
+        updateSQL();
+      });
+    }
+
+    if (capInc && capInput) {
+      capInc.addEventListener('click', function() {
+        let val = parseInt(capInput.value, 10) || 100;
+        if (val < 5000) {
+          capInput.value = val + 10;
+          updateSQL();
+        }
+      });
+    }
+
+    if (capDec && capInput) {
+      capDec.addEventListener('click', function() {
+        let val = parseInt(capInput.value, 10) || 100;
+        if (val > 10) {
+          capInput.value = val - 10;
+          updateSQL();
+        }
+      });
+    }
+
+    if (regenUuidBtn && previewUuid) {
+      regenUuidBtn.addEventListener('click', function() {
+        const id = generateUUID();
+        previewUuid.textContent = id.slice(0, 18) + '...';
+        showToast('Generated client preview UUID: ' + id.slice(0, 8), 'info');
+      });
+    }
+
+    // Toggle SQL Console View
+    let sqlVisible = true;
+    if (toggleSqlBtn && sqlTerminalBox && toggleSqlLabel) {
+      toggleSqlBtn.addEventListener('click', function() {
+        sqlVisible = !sqlVisible;
+        if (sqlVisible) {
+          sqlTerminalBox.classList.remove('hidden');
+          toggleSqlLabel.textContent = 'Hide SQL Statement';
+        } else {
+          sqlTerminalBox.classList.add('hidden');
+          toggleSqlLabel.textContent = 'Show SQL Statement';
+        }
+      });
+    }
+
+    // Notification toast dispatcher
+    function showToast(message, type = 'success') {
+      if (!toastContainer) return;
+      const toast = document.createElement('div');
+      toast.className = 'px-space-md py-space-sm rounded-lg shadow-xl font-label-code-sm text-label-code-sm flex items-center gap-space-sm pointer-events-auto transform translate-y-2 opacity-0 transition-all duration-200 ' + 
+        (type === 'success' ? 'bg-surface-container-high text-primary border border-primary/20' : 
+         type === 'error' ? 'bg-surface-container-high text-error border border-error/20' : 
+         'bg-surface-container-high text-on-surface border border-surface-container-highest');
+      
+      const icon = type === 'success' ? 'check_circle' : type === 'error' ? 'error' : 'info';
+      toast.innerHTML = `<span class="material-symbols-outlined text-[16px]">${icon}</span><span>${message}</span>`;
+      toastContainer.appendChild(toast);
+
+      requestAnimationFrame(() => {
+        toast.classList.remove('translate-y-2', 'opacity-0');
+      });
+
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-2');
+        setTimeout(() => toast.remove(), 250);
+      }, 3500);
+    }
+
+    // Copy SQL text
+    if (copySqlBtn) {
+      copySqlBtn.addEventListener('click', function() {
+        const title = titleInput ? titleInput.value : 'Event Title';
+        const cap = capInput ? capInput.value : 100;
+        const text = `INSERT INTO public.events (event_id, student_id, title, capacity, created_at) VALUES (gen_random_uuid(), 'usr_9f82d1c4', '${title}', ${cap}, NOW());`;
+        navigator.clipboard.writeText(text).then(() => {
+          showToast('SQL DML snippet copied to clipboard');
+        });
+      });
+    }
+
+    // Form Commit insertion action
+    if (publishBtn) {
+      publishBtn.addEventListener('click', function() {
+        const title = titleInput ? titleInput.value.trim() : '';
+        const cap = capInput ? capInput.value : 100;
+        if (!title) {
+          showToast('Validation Error: Column "title" cannot be empty', 'error');
+          titleInput.focus();
+          return;
+        }
+
+        const newId = generateUUID();
+        const shortId = newId.slice(0, 8);
+        
+        // Add optimistic row to table
+        if (tableBody) {
+          const row = document.createElement('tr');
+          row.className = 'hover:bg-surface-container-high/60 transition-colors group bg-primary/5';
+          row.innerHTML = `
+            <td class="py-3 px-space-md font-label-code-sm text-label-code-sm text-on-surface-variant">
+              <div class="flex items-center gap-1.5">
+                <span class="text-primary font-mono">${shortId}...</span>
+                <button class="opacity-0 group-hover:opacity-100 hover:text-primary transition-opacity text-on-surface-variant" onclick="navigator.clipboard.writeText('${newId}')" title="Copy UUID">
+                  <span class="material-symbols-outlined text-[14px]">content_copy</span>
+                </button>
+              </div>
+            </td>
+            <td class="py-3 px-space-md">
+              <div class="flex flex-col">
+                <span class="font-title-md text-title-md text-on-surface font-medium truncate max-w-xs">${title}</span>
+                <span class="font-label-code-sm text-label-code-sm text-primary">New live registration open</span>
+              </div>
+            </td>
+            <td class="py-3 px-space-md">
+              <div class="flex items-center gap-2">
+                <span class="h-6 w-6 rounded-full bg-primary/20 text-primary flex items-center justify-center font-label-code-sm text-label-code-sm font-bold">AR</span>
+                <div class="flex flex-col">
+                  <span class="text-on-surface font-medium">Alex Rivera</span>
+                  <span class="font-label-code-sm text-label-code-sm text-on-surface-variant">usr_9f82d1c4</span>
+                </div>
+              </div>
+            </td>
+            <td class="py-3 px-space-md">
+              <div class="flex flex-col gap-1 w-full max-w-[200px]">
+                <div class="flex items-center justify-between font-label-code-sm text-label-code-sm">
+                  <span class="text-on-surface">0 / ${cap}</span>
+                  <span class="text-primary font-badge-caps text-badge-caps">0% OPEN</span>
+                </div>
+                <div class="w-full h-1.5 rounded-full bg-surface-container-lowest overflow-hidden">
+                  <div class="h-full bg-primary rounded-full" style="width: 2%"></div>
+                </div>
+              </div>
+            </td>
+            <td class="py-3 px-space-md font-label-code-sm text-label-code-sm text-on-surface-variant">
+              <div>Just now</div>
+              <div class="text-[10px] text-primary">now() committed</div>
+            </td>
+            <td class="py-3 px-space-md text-right">
+              <div class="flex items-center justify-end gap-1">
+                <button class="h-7 w-7 rounded bg-surface-container-highest hover:bg-surface-bright text-on-surface-variant hover:text-on-surface flex items-center justify-center transition-colors">
+                  <span class="material-symbols-outlined text-[16px]">groups</span>
+                </button>
+                <button class="h-7 w-7 rounded bg-surface-container-highest hover:bg-surface-bright text-on-surface-variant hover:text-on-surface flex items-center justify-center transition-colors">
+                  <span class="material-symbols-outlined text-[16px]">edit</span>
+                </button>
+                <button class="h-7 w-7 rounded bg-surface-container-highest hover:bg-error-container text-on-surface-variant hover:text-error flex items-center justify-center transition-colors">
+                  <span class="material-symbols-outlined text-[16px]">delete</span>
+                </button>
+              </div>
+            </td>
+          `;
+          tableBody.prepend(row);
+        }
+
+        showToast(`Committed 1 row: events (${shortId})`);
+        titleInput.value = '';
+        updateSQL();
+      });
+    }
+
+    if (draftBtn) {
+      draftBtn.addEventListener('click', function() {
+        showToast('Draft stored in browser local state cache');
+      });
+    }
+
+    // Keyboard and Trigger focusing
+    if (triggerFocusBtn && titleInput) {
+      triggerFocusBtn.addEventListener('click', function() {
+        titleInput.focus();
+        titleInput.select();
+      });
+    }
+
+    if (quickDmlBtn) {
+      quickDmlBtn.addEventListener('click', function() {
+        if (!sqlVisible && toggleSqlBtn) {
+          toggleSqlBtn.click();
+        }
+        if (sqlTerminalBox) {
+          sqlTerminalBox.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }
+
+    // Interactive Search and Table Filter
+    if (searchInput && tableBody && emptyState) {
+      searchInput.addEventListener('input', function() {
+        const query = this.value.toLowerCase().trim();
+        const rows = tableBody.querySelectorAll('tr');
+        let matched = 0;
+
+        rows.forEach(row => {
+          const text = row.innerText.toLowerCase();
+          if (text.includes(query)) {
+            row.style.display = '';
+            matched++;
+          } else {
+            row.style.display = 'none';
+          }
+        });
+
+        if (matched === 0) {
+          tableBody.classList.add('hidden');
+          emptyState.classList.remove('hidden');
+          emptyState.classList.add('flex');
+        } else {
+          tableBody.classList.remove('hidden');
+          emptyState.classList.add('hidden');
+          emptyState.classList.remove('flex');
+        }
+      });
+    }
+
+    if (resetFilterBtn && searchInput) {
+      resetFilterBtn.addEventListener('click', function() {
+        searchInput.value = '';
+        searchInput.dispatchEvent(new Event('input'));
+      });
+    }
+
+    // Export Dumps
+    if (exportJsonBtn) {
+      exportJsonBtn.addEventListener('click', function() {
+        const mockDump = [
+          { event_id: "e83f0a12-881b-41f2-95f6-cbb105e61280", title: "AI Research Symposium & Labs Showcase", capacity: 200, student_id: "usr_9f82d1c4" },
+          { event_id: "c42b89fa-710d-407b-801e-7b774fa191b9", title: "Fullstack React & Next.js Bootcamp", capacity: 80, student_id: "usr_9f82d1c4" },
+          { event_id: "910d54cc-39ac-4521-82ef-5079a42f6aa1", title: "Campus Cybersecurity CTF Challenge", capacity: 50, student_id: "usr_4a11b980" }
+        ];
+        const blob = new Blob([JSON.stringify(mockDump, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'events_export.json';
+        a.click();
+        showToast('Exported events.json schema payload');
+      });
+    }
+
+    if (exportCsvBtn) {
+      exportCsvBtn.addEventListener('click', function() {
+        const csv = "event_id,student_id,title,capacity\ne83f0a12,usr_9f82d1c4,AI Symposium,200\nc42b89fa,usr_9f82d1c4,Fullstack Bootcamp,80";
+        const blob = new Blob([csv], { type: 'text/csv' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'events_export.csv';
+        a.click();
+        showToast('Exported events.csv relational table');
+      });
+    }
+
+    // Keyboard shortcuts
+    window.addEventListener('keydown', function(e) {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'n') {
+        e.preventDefault();
+        if (titleInput) {
+          titleInput.focus();
+          titleInput.select();
+        }
+      }
+    });
+
+  })();
+</script></main><footer class="w-full bg-surface-container-low py-space-lg"><div class="w-full px-margin flex flex-col md:flex-row items-center justify-between gap-space-md text-on-surface-variant font-label-code-sm text-label-code-sm"><div>CampusEvent Engine • Relational Runtime (PostgreSQL Local Pool)</div><div class="flex items-center gap-space-lg"><span class="flex items-center gap-1.5"><span class="h-2 w-2 rounded-full bg-primary"></span>Mock DB Sync Active</span><span>Schema v2.4.0</span></div></div></footer></body></html>

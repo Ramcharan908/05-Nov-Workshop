@@ -3,14 +3,77 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101210">
   <title>CampusPulse</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #0c0d0e; }
-    iframe { display: block; width: 100%; height: 100%; border: 0; }
+    :root { color-scheme: dark; --bg: #101210; --panel: #171b18; --line: #2b342e; --text: #e8eee9; --muted: #9aa79e; --green: #4ee0a4; --mono: "Space Mono", monospace; --sans: "DM Sans", sans-serif; }
+    * { box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: var(--bg); color: var(--text); font-family: var(--sans); }
+    .portal { height: 100dvh; display: grid; grid-template-rows: 58px 1fr; }
+    .bar { z-index: 1; display: flex; align-items: center; gap: 20px; padding: 0 18px; border-bottom: 1px solid var(--line); background: rgba(18, 21, 19, .98); }
+    .brand { display: flex; align-items: center; gap: 9px; flex: 0 0 auto; font-size: 15px; font-weight: 700; }
+    .brand-icon { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 6px; color: #0a2117; background: var(--green); }
+    .brand-icon svg { width: 16px; height: 16px; }
+    .brand span:last-child span { color: var(--green); }
+    .nav { min-width: 0; display: flex; align-items: center; gap: 3px; flex: 1; overflow-x: auto; scrollbar-width: none; }
+    .nav::-webkit-scrollbar { display: none; }
+    .nav button { flex: 0 0 auto; min-height: 34px; padding: 0 10px; border: 0; border-radius: 4px; color: var(--muted); background: transparent; cursor: pointer; font: 11px var(--sans); }
+    .nav button:hover, .nav button[aria-current="page"] { color: var(--text); background: #232a25; }
+    .nav button[aria-current="page"] { box-shadow: inset 0 -2px var(--green); }
+    .user-picker { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; padding-left: 12px; border-left: 1px solid var(--line); }
+    .avatar { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; color: #062116; background: var(--green); font-size: 11px; font-weight: 700; }
+    .user-select { width: min(190px, 22vw); min-width: 120px; max-width: 190px; height: 34px; border: 1px solid var(--line); border-radius: 4px; padding: 0 8px; color: var(--text); background: #111512; font: 10px var(--mono); }
+    .state { max-width: 150px; color: var(--muted); font: 8px var(--mono); }
+    .state.is-error { color: #ff9a8d; }
+    .viewport { min-height: 0; position: relative; }
+    iframe { display: block; width: 100%; height: 100%; border: 0; background: #0d0e11; }
+    .loading { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); background: #0d0e11; font: 10px var(--mono); pointer-events: none; }
+    @media (max-width: 860px) {
+      .bar { gap: 10px; padding: 0 10px; }
+      .brand { font-size: 0; }
+      .brand span:last-child { display: none; }
+      .brand-icon { width: 30px; height: 30px; }
+      .nav button { padding: 0 7px; font-size: 10px; }
+      .state { display: none; }
+      .user-picker { padding-left: 8px; }
+      .user-select { width: 135px; }
+    }
+    @media (max-width: 520px) {
+      .portal { grid-template-rows: 94px 1fr; }
+      .bar { display: grid; grid-template-columns: 35px 1fr auto; grid-template-rows: 42px 38px; gap: 0 7px; padding: 4px 10px; }
+      .brand { grid-row: 1; grid-column: 1; }
+      .user-picker { grid-row: 1; grid-column: 2 / 4; justify-content: end; border: 0; padding: 0; }
+      .nav { grid-row: 2; grid-column: 1 / 4; width: 100%; }
+      .nav button { min-height: 30px; }
+      .user-select { width: 165px; max-width: 165px; }
+    }
   </style>
 </head>
 <body>
-  <iframe id="campus-page" src="./code.html" title="CampusPulse events"></iframe>
-  <script src="./interactions.js"></script>
+  <div class="portal">
+    <header class="bar">
+      <a class="brand" href="./" aria-label="CampusPulse home"><span class="brand-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20V9m5 11V4m6 16v-8m5 8V7"/><path d="M2 20h20"/></svg></span><span>Campus<span>Pulse</span></span></a>
+      <nav class="nav" aria-label="CampusPulse views">
+        <button type="button" data-view="college_campus_events_hub" aria-current="page">Campus Feed</button>
+        <button type="button" data-view="events_catalog_discovery">Event Catalog</button>
+        <button type="button" data-view="manage_create_events">Manage Events</button>
+        <button type="button" data-view="registrations_attendees">Registrations</button>
+        <button type="button" data-view="database_schema_viewer">Schema</button>
+      </nav>
+      <div class="user-picker">
+        <span class="avatar" id="user-avatar">?</span>
+        <select class="user-select" id="active-user" aria-label="Switch active campus user"><option>Loading users…</option></select>
+        <span class="state" id="api-state">CONNECTING</span>
+      </div>
+    </header>
+    <main class="viewport">
+      <iframe id="screen" title="CampusPulse workspace" src="./college_campus_events_hub/code.html"></iframe>
+      <div class="loading" id="screen-loading">Loading workspace…</div>
+    </main>
+  </div>
+  <script src="./portal.js"></script>
 </body>
 </html>

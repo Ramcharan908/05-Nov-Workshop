@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>CampusEvent Engine</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-container-high": "#292a2d", "on-secondary": "#1000a9", "primary": "#4edea3", "surface-tint": "#4edea3", "primary-fixed-dim": "#4edea3", "outline": "#86948a", "inverse-primary": "#006c49", "on-tertiary-fixed-variant": "#653e00", "secondary-fixed-dim": "#c0c1ff", "surface-bright": "#38393c", "on-error-container": "#ffdad6", "tertiary-container": "#e29100", "secondary-fixed": "#e1e0ff", "inverse-surface": "#e3e2e6", "tertiary-fixed": "#ffddb8", "primary-fixed": "#6ffbbe", "on-background": "#e3e2e6", "surface-dim": "#121316", "error-container": "#93000a", "on-primary-container": "#00422b", "outline-variant": "#3c4a42", "secondary-container": "#3131c0", "on-secondary-fixed-variant": "#2f2ebe", "on-surface": "#e3e2e6", "on-surface-variant": "#bbcabf", "surface": "#121316", "on-tertiary-fixed": "#2a1700", "surface-container-lowest": "#0d0e11", "background": "#121316", "surface-container-low": "#1b1b1f", "on-tertiary-container": "#523200", "surface-container-highest": "#343538", "on-primary-fixed": "#002113", "on-error": "#690005", "inverse-on-surface": "#2f3033", "primary-container": "#10b981", "surface-container": "#1f1f23", "on-primary": "#003824", "tertiary": "#ffb95f", "error": "#ffb4ab", "on-tertiary": "#472a00", "surface-variant": "#343538", "on-primary-fixed-variant": "#005236", "tertiary-fixed-dim": "#ffb95f", "secondary": "#c0c1ff", "on-secondary-fixed": "#07006c", "on-secondary-container": "#b0b2ff" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-lg": "1rem", "space-md": "0.75rem", "space-xs": "0.25rem", "space-xl": "1.5rem", "space-sm": "0.5rem", "margin": "1.5rem", "gutter": "1rem" }, "fontFamily": { "headline-md": [ "Inter" ], "body-md": [ "Inter" ], "label-code-sm": [ "JetBrains Mono" ], "headline-xl": [ "Inter" ], "headline-lg": [ "Inter" ], "label-code-md": [ "JetBrains Mono" ], "badge-caps": [ "JetBrains Mono" ], "title-md": [ "Inter" ], "body-sm": [ "Inter" ] }, "fontSize": { "headline-md": [ "20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "body-md": [ "14px", { "lineHeight": "20px", "fontWeight": "400" } ], "label-code-sm": [ "11px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "400" } ], "headline-xl": [ "32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "headline-lg": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "label-code-md": [ "13px", { "lineHeight": "18px", "fontWeight": "500" } ], "badge-caps": [ "10px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "600" } ], "title-md": [ "16px", { "lineHeight": "24px", "fontWeight": "500" } ], "body-sm": [ "13px", { "lineHeight": "18px", "fontWeight": "400" } ] } } } };</script></head><body class="bg-surface-container-lowest font-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-low/90 backdrop-blur-md"><div class="h-16 w-full px-margin flex items-center justify-between gap-gutter"><div class="flex items-center gap-space-md"><a class="flex items-center gap-space-sm" data-path="events-catalog" href="#"><div class="h-8 w-8 rounded-lg bg-surface-container-highest flex items-center justify-center"><span class="material-symbols-outlined text-primary text-[20px]">dataset</span></div><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-headline-md text-headline-md tracking-tight text-on-surface">EventPulse</span><span class="font-badge-caps text-badge-caps uppercase px-1.5 py-0.5 rounded bg-surface-container-highest text-primary">ENGINE</span></div><span class="font-label-code-sm text-label-code-sm text-on-surface-variant flex items-center gap-1"><span class="h-1.5 w-1.5 rounded-full bg-primary animate-pulse"></span>Local Schema Live</span></div></a></div><nav class="hidden xl:flex items-center gap-space-xs bg-surface-container p-1 rounded-xl" data-active-classes="bg-surface-container-high text-on-surface font-title-md"><a class="px-space-md py-1.5 rounded text-on-surface-variant font-body-sm text-body-sm transition-colors hover:text-on-surface hover:bg-surface-container-high" data-path="events-catalog" href="#">Events Catalog</a><a class="px-space-md py-1.5 rounded text-on-surface-variant font-body-sm text-body-sm transition-colors hover:text-on-surface hover:bg-surface-container-high" data-path="manage-and-create-events" href="#">Manage &amp; Create Events</a><a class="px-space-md py-1.5 rounded text-on-surface-variant font-body-sm text-body-sm transition-colors hover:text-on-surface hover:bg-surface-container-high" data-path="registrations-and-attendees" href="#">Registrations &amp; Attendees</a><a aria-current="page" class="px-space-md py-1.5 rounded transition-colors bg-surface-container-high text-on-surface font-title-md" data-path="database-schema-viewer" href="#">Database Schema Viewer</a></nav><div class="flex items-center gap-space-md"><div class="hidden md:flex items-center bg-surface-container px-space-md py-1 rounded-lg text-on-surface-variant gap-space-sm"><span class="material-symbols-outlined text-[18px]">search</span><span class="font-body-sm text-body-sm">Search entities...</span><kbd class="font-label-code-sm text-label-code-sm bg-surface-container-highest px-1.5 py-0.5 rounded text-on-surface">⌘K</kbd></div><button class="h-8 w-8 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span></button><div class="relative group"><div class="flex items-center gap-space-sm bg-surface-container hover:bg-surface-container-high px-space-md py-1 rounded-xl cursor-pointer transition-all"><div class="flex flex-col text-right"><div class="flex items-center justify-end gap-space-xs"><span class="font-body-sm text-body-sm text-on-surface font-medium">Alex Rivera</span><span class="font-badge-caps text-badge-caps bg-primary-container/20 text-primary px-1 rounded uppercase">organizer</span></div><span class="font-label-code-sm text-label-code-sm text-on-surface-variant truncate max-w-[140px]">alex@univ.edu</span></div><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1X8n6S8otyJBqFpxm_xnTJ-M0w_btPmW9bUjhd3yckijY6eutpPHHGu1bLtBxhtYWzmgdbA_RzzMjOSEr06ycQiq3nsFXwx8BWTOLyxX4asljw28AGh9fIL9B7EKGPIyUSkI02KXcCOuJh-PDiffpBGoDs4skhOVwJVe6Sm2GJce-UAEUd0ykkoBvJNngOQvv1ywa8VIChZa5Fk-GD8L4EquffPC5SzIHJEn-u2qUuh"/><span class="material-symbols-outlined text-on-surface-variant text-[18px]">expand_more</span></div><div class="absolute right-0 top-full mt-2 w-80 bg-surface-container-high rounded-xl p-space-sm shadow-[0_12px_32px_rgba(0,0,0,0.6)] hidden group-hover:block z-50"><div class="px-space-sm py-1 mb-1 flex items-center justify-between"><span class="font-badge-caps text-badge-caps uppercase tracking-wider text-on-surface-variant">Simulated User Context</span><span class="font-label-code-sm text-label-code-sm text-primary flex items-center gap-1"><span class="h-1.5 w-1.5 rounded-full bg-primary"></span>No-Auth Mode</span></div><div class="flex flex-col gap-1"><div class="p-space-sm rounded bg-surface-container flex items-center justify-between cursor-pointer"><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-body-sm text-body-sm text-on-surface font-medium">Alex Rivera</span><span class="font-badge-caps text-badge-caps bg-primary-container text-on-primary-container px-1 rounded uppercase">active</span></div><span class="font-label-code-sm text-label-code-sm text-on-surface-variant">alex@univ.edu</span><span class="font-label-code-sm text-label-code-sm text-on-surface-variant">uuid: usr_9f82d1c4</span></div><span class="material-symbols-outlined text-primary text-[18px]">check_circle</span></div><div class="p-space-sm rounded hover:bg-surface-container flex items-center justify-between cursor-pointer transition-colors"><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-body-sm text-body-sm text-on-surface font-medium">Maya Chen</span><span class="font-badge-caps text-badge-caps bg-secondary-container/40 text-secondary px-1 rounded uppercase">student</span></div><span class="font-label-code-sm text-label-code-sm text-on-surface-variant">maya@univ.edu</span><span class="font-label-code-sm text-label-code-sm text-on-surface-variant">uuid: usr_4a11b980</span></div><span class="material-symbols-outlined text-on-surface-variant text-[18px]">swap_horiz</span></div><div class="p-space-sm rounded hover:bg-surface-container flex items-center justify-between cursor-pointer transition-colors"><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-body-sm text-body-sm text-on-surface font-medium">Marcus Brody</span><span class="font-badge-caps text-badge-caps bg-tertiary-container/30 text-tertiary px-1 rounded uppercase">admin</span></div><span class="font-label-code-sm text-label-code-sm text-on-surface-variant">marcus@univ.edu</span><span class="font-label-code-sm text-label-code-sm text-on-surface-variant">uuid: usr_7c34ea12</span></div><span class="material-symbols-outlined text-on-surface-variant text-[18px]">swap_horiz</span></div></div></div></div></div></div></header><main class="w-full pt-16 bg-surface-container-lowest min-h-screen"><div class="flex flex-col w-full">
+<!-- Interactive View Switcher & Engine Status Ribbon -->
+<div class="px-margin pt-space-lg pb-space-sm flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-space-xs">
+<span class="font-badge-caps text-badge-caps uppercase tracking-wider text-primary px-1.5 py-0.5 rounded bg-primary-container/20">RELATIONAL GRAPH INSPECTOR</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant flex items-center gap-1">
+<span class="h-1.5 w-1.5 rounded-full bg-primary animate-ping"></span>
+          Pool: active (3 tables)
+        </span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">Postgres Schema &amp; Topology</h1>
+</div>
+<!-- Mode Selector Tabs -->
+<div class="flex items-center p-1 rounded-xl bg-surface-container-high self-start md:self-auto overflow-x-auto max-w-full">
+<button class="flex items-center gap-1.5 px-space-md py-1.5 rounded-lg bg-surface-container-lowest text-primary font-body-sm text-body-sm shadow-sm transition-all" id="tab-erd" onclick="switchView('erd')">
+<span class="material-symbols-outlined text-[16px]">hub</span>
+        Interactive ERD
+      </button>
+<button class="flex items-center gap-1.5 px-space-md py-1.5 rounded-lg text-on-surface-variant font-body-sm text-body-sm hover:text-on-surface hover:bg-surface-container transition-all" id="tab-dict" onclick="switchView('dict')">
+<span class="material-symbols-outlined text-[16px]">menu_book</span>
+        Data Dictionary
+      </button>
+<button class="flex items-center gap-1.5 px-space-md py-1.5 rounded-lg text-on-surface-variant font-body-sm text-body-sm hover:text-on-surface hover:bg-surface-container transition-all" id="tab-sql" onclick="switchView('sql')">
+<span class="material-symbols-outlined text-[16px]">terminal</span>
+        Raw DDL &amp; Constraints
+      </button>
+</div>
+</div>
+<!-- Schema Metric Bar -->
+<div class="px-margin py-space-xs">
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-sm">
+<div class="p-space-md rounded-xl bg-surface-container-low flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-badge-caps text-badge-caps uppercase text-on-surface-variant">Tables In Graph</span>
+<span class="font-headline-md text-headline-md text-on-surface mt-0.5">3</span>
+</div>
+<span class="material-symbols-outlined text-primary text-[28px] opacity-80">table_chart</span>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-low flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-badge-caps text-badge-caps uppercase text-on-surface-variant">Foreign Keys</span>
+<span class="font-headline-md text-headline-md text-secondary mt-0.5">3 Constraints</span>
+</div>
+<span class="material-symbols-outlined text-secondary text-[28px] opacity-80">arrow_forward</span>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-low flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-badge-caps text-badge-caps uppercase text-on-surface-variant">Total Seed Records</span>
+<span class="font-headline-md text-headline-md text-tertiary mt-0.5">913 Rows</span>
+</div>
+<span class="material-symbols-outlined text-tertiary text-[28px] opacity-80">database</span>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-low flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-badge-caps text-badge-caps uppercase text-on-surface-variant">Integrity Status</span>
+<span class="font-headline-md text-headline-md text-primary mt-0.5 flex items-center gap-1">
+<span class="h-2 w-2 rounded-full bg-primary"></span>
+            Enforced
+          </span>
+</div>
+<span class="material-symbols-outlined text-primary text-[28px] opacity-80">verified_user</span>
+</div>
+</div>
+</div>
+<!-- ERD CANVAS SECTION (Active View) -->
+<section class="px-margin py-space-sm flex flex-col gap-space-sm" id="view-erd-canvas">
+<!-- Canvas Controls Bar -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm p-space-sm rounded-xl bg-surface-container-low">
+<div class="flex items-center gap-space-xs">
+<div class="flex items-center bg-surface-container-high px-space-sm py-1 rounded-lg text-on-surface font-label-code-sm text-label-code-sm">
+<span class="material-symbols-outlined text-primary text-[14px] mr-1">scatter_plot</span>
+          16px Dot-Grid Substrate
+        </div>
+<button class="flex items-center gap-1 px-space-sm py-1 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface font-label-code-sm text-label-code-sm transition-colors" id="flow-btn" onclick="toggleConnectorAnimation()">
+<span class="material-symbols-outlined text-[15px] text-primary">play_arrow</span>
+          Pulse FK Streams
+        </button>
+<button class="flex items-center gap-1 px-space-sm py-1 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface font-label-code-sm text-label-code-sm transition-colors" onclick="highlightAllLinks()">
+<span class="material-symbols-outlined text-[15px]">center_focus_strong</span>
+          Focus Active Joins
+        </button>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant hidden sm:inline">Entity Selection:</span>
+<div class="flex items-center gap-1">
+<button class="px-2 py-0.5 rounded bg-surface-container-high text-primary hover:bg-surface-bright font-label-code-sm text-label-code-sm" onclick="isolateEntity('users')">public.users</button>
+<button class="px-2 py-0.5 rounded bg-surface-container-high text-secondary hover:bg-surface-bright font-label-code-sm text-label-code-sm" onclick="isolateEntity('events')">public.events</button>
+<button class="px-2 py-0.5 rounded bg-surface-container-high text-tertiary hover:bg-surface-bright font-label-code-sm text-label-code-sm" onclick="isolateEntity('registrations')">public.registrations</button>
+<button class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant hover:text-on-surface font-label-code-sm text-label-code-sm" onclick="isolateEntity('all')">Reset</button>
+</div>
+</div>
+</div>
+<!-- Infinite Canvas Container with Orthogonal 16px Dot Pattern -->
+<div class="relative w-full h-[620px] rounded-2xl bg-surface-container-lowest overflow-hidden shadow-xl select-none" style="background-image: radial-gradient(rgba(187, 202, 191, 0.12) 1.2px, transparent 0); background-size: 16px 16px;">
+<!-- Ambient Glow spots behind key nodes -->
+<div class="absolute -top-12 left-10 w-96 h-96 rounded-full bg-primary/5 blur-3xl pointer-events-none"></div>
+<div class="absolute top-48 right-16 w-96 h-96 rounded-full bg-secondary/5 blur-3xl pointer-events-none"></div>
+<div class="absolute -bottom-10 left-1/3 w-80 h-80 rounded-full bg-tertiary/5 blur-3xl pointer-events-none"></div>
+<!-- SVG BEZIER CONNECTOR GRAPH -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none z-10" id="erd-svg-layer" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="marker-arrow-primary" markerheight="6" markerwidth="6" orient="auto-start-reverse" refx="8" refy="5" viewbox="0 0 10 10">
+<path d="M 0 1 L 9 5 L 0 9 z" fill="#4edea3"></path>
+</marker>
+<marker id="marker-arrow-secondary" markerheight="6" markerwidth="6" orient="auto-start-reverse" refx="8" refy="5" viewbox="0 0 10 10">
+<path d="M 0 1 L 9 5 L 0 9 z" fill="#c0c1ff"></path>
+</marker>
+<marker id="marker-arrow-tertiary" markerheight="6" markerwidth="6" orient="auto-start-reverse" refx="8" refy="5" viewbox="0 0 10 10">
+<path d="M 0 1 L 9 5 L 0 9 z" fill="#ffb95f"></path>
+</marker>
+</defs>
+<!-- Curve 1: users.uuid -> events.student_id (Desktop coordinates) -->
+<g class="transition-opacity duration-300" id="rel-users-events">
+<path d="M 330 148 C 420 148, 410 200, 520 200" fill="none" id="path-users-events" marker-end="url(#marker-arrow-primary)" stroke="#4edea3" stroke-dasharray="6,4" stroke-width="2"></path>
+<rect fill="#1f1f23" height="18" rx="4" width="46" x="405" y="162"></rect>
+<text fill="#4edea3" font-family="JetBrains Mono" font-size="10" font-weight="600" text-anchor="middle" x="428" y="174">1 : N</text>
+</g>
+<!-- Curve 2: users.uuid -> registrations.student_id -->
+<g class="transition-opacity duration-300" id="rel-users-registrations">
+<path d="M 230 250 C 230 400, 230 440, 310 470" fill="none" id="path-users-registrations" marker-end="url(#marker-arrow-secondary)" stroke="#c0c1ff" stroke-dasharray="6,4" stroke-width="2"></path>
+<rect fill="#1f1f23" height="18" rx="4" width="46" x="235" y="380"></rect>
+<text fill="#c0c1ff" font-family="JetBrains Mono" font-size="10" font-weight="600" text-anchor="middle" x="258" y="392">1 : N</text>
+</g>
+<!-- Curve 3: events.event_id -> registrations.event_id -->
+<g class="transition-opacity duration-300" id="rel-events-registrations">
+<path d="M 680 320 C 680 430, 710 470, 680 495" fill="none" id="path-events-registrations" marker-end="url(#marker-arrow-tertiary)" stroke="#ffb95f" stroke-dasharray="6,4" stroke-width="2"></path>
+<rect fill="#1f1f23" height="18" rx="4" width="46" x="670" y="405"></rect>
+<text fill="#ffb95f" font-family="JetBrains Mono" font-size="10" font-weight="600" text-anchor="middle" x="693" y="417">1 : N</text>
+</g>
+</svg>
+<!-- ERD NODE 1: users TABLE -->
+<div class="erd-node absolute left-8 top-16 w-72 sm:w-80 rounded-xl bg-surface-container-low shadow-xl z-20 transition-transform duration-200 hover:-translate-y-0.5" id="card-users">
+<!-- Node Header -->
+<div class="px-space-md py-space-sm bg-surface-container rounded-t-xl flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">account_tree</span>
+<span class="font-label-code-md text-label-code-md font-semibold text-on-surface">users</span>
+<span class="font-badge-caps text-badge-caps px-1 py-0.2 rounded bg-surface-container-highest text-on-surface-variant">BASE</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="font-badge-caps text-badge-caps text-primary px-1.5 py-0.5 rounded bg-primary-container/20">3 ROWS</span>
+<button class="text-on-surface-variant hover:text-on-surface p-0.5 rounded"><span class="material-symbols-outlined text-[16px]">more_horiz</span></button>
+</div>
+</div>
+<!-- Node Columns -->
+<div class="p-space-xs flex flex-col gap-0.5">
+<!-- Column: uuid (PK) -->
+<div class="group px-space-sm py-1.5 rounded flex items-center justify-between hover:bg-surface-container transition-colors cursor-pointer" onclick="inspectColumn('users', 'uuid')">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-[14px]" title="Primary Key">key</span>
+<span class="font-label-code-sm text-label-code-sm font-semibold text-on-surface">uuid</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-badge-caps text-badge-caps px-1 py-0.5 rounded bg-tertiary-container/30 text-tertiary">PK</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">uuid</span>
+</div>
+</div>
+<!-- Column: email -->
+<div class="group px-space-sm py-1.5 rounded flex items-center justify-between hover:bg-surface-container transition-colors cursor-pointer" onclick="inspectColumn('users', 'email')">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-[14px]">alternate_email</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface">email</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-badge-caps text-badge-caps px-1 py-0.5 rounded bg-surface-container text-on-surface-variant">UNIQUE</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">text</span>
+</div>
+</div>
+<!-- Column: role -->
+<div class="group px-space-sm py-1.5 rounded flex items-center justify-between hover:bg-surface-container transition-colors cursor-pointer" onclick="inspectColumn('users', 'role')">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-[14px]">badge</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface">role</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-badge-caps text-badge-caps px-1 py-0.5 rounded bg-surface-container text-on-surface-variant">CHECK</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">text</span>
+</div>
+</div>
+</div>
+</div>
+<!-- ERD NODE 2: events TABLE -->
+<div class="erd-node absolute right-8 sm:right-16 top-10 w-80 sm:w-96 rounded-xl bg-surface-container-low shadow-xl z-20 transition-transform duration-200 hover:-translate-y-0.5" id="card-events">
+<!-- Node Header -->
+<div class="px-space-md py-space-sm bg-surface-container rounded-t-xl flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[18px]">calendar_today</span>
+<span class="font-label-code-md text-label-code-md font-semibold text-on-surface">events</span>
+<span class="font-badge-caps text-badge-caps px-1 py-0.2 rounded bg-surface-container-highest text-on-surface-variant">ENTITY</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="font-badge-caps text-badge-caps text-secondary px-1.5 py-0.5 rounded bg-secondary-container/30">18 ROWS</span>
+<button class="text-on-surface-variant hover:text-on-surface p-0.5 rounded"><span class="material-symbols-outlined text-[16px]">more_horiz</span></button>
+</div>
+</div>
+<!-- Node Columns -->
+<div class="p-space-xs flex flex-col gap-0.5">
+<!-- Column: event_id (PK) -->
+<div class="group px-space-sm py-1.5 rounded flex items-center justify-between hover:bg-surface-container transition-colors cursor-pointer" onclick="inspectColumn('events', 'event_id')">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-[14px]">key</span>
+<span class="font-label-code-sm text-label-code-sm font-semibold text-on-surface">event_id</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-badge-caps text-badge-caps px-1 py-0.5 rounded bg-tertiary-container/30 text-tertiary">PK</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">uuid</span>
+</div>
+</div>
+<!-- Column: student_id (FK -> users.uuid) -->
+<div class="group px-space-sm py-1.5 rounded bg-primary-container/10 flex items-center justify-between hover:bg-primary-container/20 transition-colors cursor-pointer" onclick="inspectColumn('events', 'student_id')">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[14px]">link</span>
+<span class="font-label-code-sm text-label-code-sm font-semibold text-primary">student_id</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-badge-caps text-badge-caps px-1 py-0.5 rounded bg-primary text-on-primary font-bold">FK → users</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">uuid</span>
+</div>
+</div>
+<!-- Column: title -->
+<div class="group px-space-sm py-1.5 rounded flex items-center justify-between hover:bg-surface-container transition-colors cursor-pointer" onclick="inspectColumn('events', 'title')">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-[14px]">title</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface">title</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-badge-caps text-badge-caps px-1 py-0.5 rounded bg-surface-container text-on-surface-variant">NOT NULL</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">text</span>
+</div>
+</div>
+<!-- Column: capacity -->
+<div class="group px-space-sm py-1.5 rounded flex items-center justify-between hover:bg-surface-container transition-colors cursor-pointer" onclick="inspectColumn('events', 'capacity')">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-[14px]">groups</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface">capacity</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-badge-caps text-badge-caps px-1 py-0.5 rounded bg-surface-container text-on-surface-variant">&gt; 0</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">int4</span>
+</div>
+</div>
+<!-- Column: created_at -->
+<div class="group px-space-sm py-1.5 rounded flex items-center justify-between hover:bg-surface-container transition-colors cursor-pointer" onclick="inspectColumn('events', 'created_at')">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-[14px]">schedule</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface">created_at</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-badge-caps text-badge-caps px-1 py-0.5 rounded bg-surface-container text-on-surface-variant">DEFAULT now()</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">timestamptz</span>
+</div>
+</div>
+</div>
+</div>
+<!-- ERD NODE 3: registrations TABLE (Junction Table) -->
+<div class="erd-node absolute left-1/4 sm:left-[35%] bottom-6 w-80 sm:w-96 rounded-xl bg-surface-container-low shadow-xl z-20 transition-transform duration-200 hover:-translate-y-0.5" id="card-registrations">
+<!-- Node Header -->
+<div class="px-space-md py-space-sm bg-surface-container rounded-t-xl flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-tertiary text-[18px]">how_to_reg</span>
+<span class="font-label-code-md text-label-code-md font-semibold text-on-surface">registrations</span>
+<span class="font-badge-caps text-badge-caps px-1 py-0.2 rounded bg-tertiary-container/30 text-tertiary">JUNCTION (N:M)</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="font-badge-caps text-badge-caps text-tertiary px-1.5 py-0.5 rounded bg-tertiary-container/20">892 ROWS</span>
+<button class="text-on-surface-variant hover:text-on-surface p-0.5 rounded"><span class="material-symbols-outlined text-[16px]">more_horiz</span></button>
+</div>
+</div>
+<!-- Node Columns -->
+<div class="p-space-xs flex flex-col gap-0.5">
+<!-- Column: id (PK) -->
+<div class="group px-space-sm py-1.5 rounded flex items-center justify-between hover:bg-surface-container transition-colors cursor-pointer" onclick="inspectColumn('registrations', 'id')">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-[14px]">key</span>
+<span class="font-label-code-sm text-label-code-sm font-semibold text-on-surface">id</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-badge-caps text-badge-caps px-1 py-0.5 rounded bg-tertiary-container/30 text-tertiary">PK</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">uuid</span>
+</div>
+</div>
+<!-- Column: student_id (FK -> users.uuid) -->
+<div class="group px-space-sm py-1.5 rounded bg-secondary-container/20 flex items-center justify-between hover:bg-secondary-container/30 transition-colors cursor-pointer" onclick="inspectColumn('registrations', 'student_id')">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[14px]">link</span>
+<span class="font-label-code-sm text-label-code-sm font-semibold text-secondary">student_id</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-badge-caps text-badge-caps px-1 py-0.5 rounded bg-secondary text-on-secondary font-bold">FK → users</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">uuid</span>
+</div>
+</div>
+<!-- Column: event_id (FK -> events.event_id) -->
+<div class="group px-space-sm py-1.5 rounded bg-tertiary-container/20 flex items-center justify-between hover:bg-tertiary-container/30 transition-colors cursor-pointer" onclick="inspectColumn('registrations', 'event_id')">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-[14px]">link</span>
+<span class="font-label-code-sm text-label-code-sm font-semibold text-tertiary">event_id</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-badge-caps text-badge-caps px-1 py-0.5 rounded bg-tertiary text-on-tertiary font-bold">FK → events</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">uuid</span>
+</div>
+</div>
+<!-- Column: created_at -->
+<div class="group px-space-sm py-1.5 rounded flex items-center justify-between hover:bg-surface-container transition-colors cursor-pointer" onclick="inspectColumn('registrations', 'created_at')">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-[14px]">schedule</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface">created_at</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-badge-caps text-badge-caps px-1 py-0.5 rounded bg-surface-container text-on-surface-variant">DEFAULT now()</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">timestamptz</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Legend Overlay -->
+<div class="absolute bottom-3 left-4 p-space-xs rounded-xl bg-surface-container-high/90 backdrop-blur-md z-30 flex items-center gap-3">
+<div class="flex items-center gap-1 font-label-code-sm text-label-code-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-tertiary text-[14px]">key</span> PK
+        </div>
+<div class="flex items-center gap-1 font-label-code-sm text-label-code-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-[14px]">link</span> FK (users.uuid)
+        </div>
+<div class="flex items-center gap-1 font-label-code-sm text-label-code-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-tertiary text-[14px]">link</span> FK (events.event_id)
+        </div>
+<div class="flex items-center gap-1 font-label-code-sm text-label-code-sm text-on-surface-variant">
+<span class="h-2 w-2 rounded-full bg-primary"></span> CASCADE Delete
+        </div>
+</div>
+</div>
+</section>
+<!-- LIVE MOCK DATA SANDBOX & RECORD HIGHLIGHTER -->
+<section class="px-margin py-space-sm flex flex-col gap-space-md">
+<div class="p-space-lg rounded-2xl bg-surface-container-low flex flex-col gap-space-md shadow-md">
+<!-- Sandbox Header & Context Switcher -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">science</span>
+<span class="font-title-md text-title-md font-semibold text-on-surface">Live Relationship Sandbox</span>
+<span class="font-badge-caps text-badge-caps px-1.5 py-0.5 rounded bg-surface-container-high text-primary uppercase">Postgres Mock Client</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Select an active user record to trace and highlight related entity rows via foreign key cascades.</p>
+</div>
+<!-- Identity Selector -->
+<div class="flex items-center gap-space-xs bg-surface-container p-1 rounded-xl">
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant px-space-xs">Active Session:</span>
+<button class="flex items-center gap-1.5 px-space-sm py-1 rounded bg-primary-container text-on-primary-container font-label-code-sm text-label-code-sm font-semibold transition-all" id="user-alex" onclick="selectUserFilter('alex')">
+<span class="h-2 w-2 rounded-full bg-on-primary-container"></span>
+            Alex (Organizer)
+          </button>
+<button class="flex items-center gap-1.5 px-space-sm py-1 rounded hover:bg-surface-container-high text-on-surface font-label-code-sm text-label-code-sm transition-all" id="user-maya" onclick="selectUserFilter('maya')">
+<span class="h-2 w-2 rounded-full bg-secondary"></span>
+            Maya (Student)
+          </button>
+<button class="flex items-center gap-1.5 px-space-sm py-1 rounded hover:bg-surface-container-high text-on-surface font-label-code-sm text-label-code-sm transition-all" id="user-marcus" onclick="selectUserFilter('marcus')">
+<span class="h-2 w-2 rounded-full bg-tertiary"></span>
+            Marcus (Admin)
+          </button>
+</div>
+</div>
+<!-- Live Reactive Record Inspector Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-space-md">
+<!-- Table 1: users slice -->
+<div class="rounded-xl bg-surface-container p-space-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-code-md text-label-code-md text-on-surface font-semibold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[16px]">account_circle</span>
+              users table
+            </span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">LIMIT 3</span>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-high flex flex-col gap-1 transition-all" id="users-record-box">
+<div class="flex items-center justify-between">
+<span class="font-label-code-sm text-label-code-sm text-tertiary">uuid</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface font-semibold" id="active-user-uuid">usr_9f82d1c4</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">email</span>
+<span class="font-label-code-sm text-label-code-sm text-on-surface" id="active-user-email">alex@univ.edu</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">role</span>
+<span class="font-badge-caps text-badge-caps px-1 rounded bg-primary-container/20 text-primary uppercase" id="active-user-role">organizer</span>
+</div>
+</div>
+</div>
+<!-- Table 2: events slice -->
+<div class="rounded-xl bg-surface-container p-space-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-code-md text-label-code-md text-on-surface font-semibold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[16px]">event</span>
+              events (FK: student_id)
+            </span>
+<span class="font-badge-caps text-badge-caps px-1 rounded bg-secondary-container/30 text-secondary" id="events-count-badge">2 MATCHES</span>
+</div>
+<div class="flex flex-col gap-2 max-h-48 overflow-y-auto" id="events-record-box">
+<div class="p-space-sm rounded bg-surface-container-high flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface font-medium truncate">Autonomous Robotics Hackathon</span>
+<span class="font-badge-caps text-badge-caps text-on-surface-variant">cap: 120</span>
+</div>
+<div class="flex items-center justify-between font-label-code-sm text-label-code-sm">
+<span class="text-secondary truncate">evt_88301fa9</span>
+<span class="text-primary truncate">fk → usr_9f82d1c4</span>
+</div>
+</div>
+<div class="p-space-sm rounded bg-surface-container-high flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface font-medium truncate">Campus AI Keynote 2025</span>
+<span class="font-badge-caps text-badge-caps text-on-surface-variant">cap: 350</span>
+</div>
+<div class="flex items-center justify-between font-label-code-sm text-label-code-sm">
+<span class="text-secondary truncate">evt_44b0e8c1</span>
+<span class="text-primary truncate">fk → usr_9f82d1c4</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Table 3: registrations slice -->
+<div class="rounded-xl bg-surface-container p-space-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-code-md text-label-code-md text-on-surface font-semibold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-tertiary text-[16px]">fact_check</span>
+              registrations (FK Junction)
+            </span>
+<span class="font-badge-caps text-badge-caps px-1 rounded bg-tertiary-container/30 text-tertiary" id="registrations-count-badge">1 MATCH</span>
+</div>
+<div class="flex flex-col gap-2 max-h-48 overflow-y-auto" id="registrations-record-box">
+<div class="p-space-sm rounded bg-surface-container-high flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-label-code-sm text-label-code-sm text-tertiary">reg_710ca09e</span>
+<span class="font-badge-caps text-badge-caps text-primary">CONFIRMED</span>
+</div>
+<div class="flex flex-col font-label-code-sm text-label-code-sm text-on-surface-variant">
+<span>student_id: <strong class="text-on-surface">usr_9f82d1c4</strong></span>
+<span>event_id: <strong class="text-secondary">evt_88301fa9</strong></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- DATA DICTIONARY & CONSTRAINTS VIEW (Toggled) -->
+<section class="px-margin py-space-sm hidden flex-col gap-space-sm" id="view-dict-section">
+<div class="rounded-2xl bg-surface-container-low p-space-lg shadow-md flex flex-col gap-space-md">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Data Dictionary &amp; Referential Constraints</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Comprehensive field breakdown, relational typing, default values, and index policies.</p>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left font-body-sm text-body-sm">
+<thead>
+<tr class="bg-surface-container font-label-code-sm text-label-code-sm text-on-surface-variant uppercase">
+<th class="py-space-sm px-space-md rounded-l">Table</th>
+<th class="py-space-sm px-space-md">Column</th>
+<th class="py-space-sm px-space-md">Type</th>
+<th class="py-space-sm px-space-md">Constraint</th>
+<th class="py-space-sm px-space-md">Foreign Key Target</th>
+<th class="py-space-sm px-space-md rounded-r">On Delete</th>
+</tr>
+</thead>
+<tbody class="font-label-code-sm text-label-code-sm">
+<tr class="hover:bg-surface-container/60 transition-colors">
+<td class="py- space-sm px-space-md text-primary font-semibold">users</td>
+<td class="py-space-sm px-space-md text-on-surface">uuid</td>
+<td class="py-space-sm px-space-md text-on-surface-variant">uuid</td>
+<td class="py-space-sm px-space-md"><span class="px-1.5 py-0.5 rounded bg-tertiary-container/30 text-tertiary">PRIMARY KEY</span></td>
+<td class="py-space-sm px-space-md text-on-surface-variant">—</td>
+<td class="py-space-sm px-space-md text-on-surface-variant">—</td>
+</tr>
+<tr class="hover:bg-surface-container/60 transition-colors">
+<td class="py-space-sm px-space-md text-primary font-semibold">users</td>
+<td class="py-space-sm px-space-md text-on-surface">email</td>
+<td class="py-space-sm px-space-md text-on-surface-variant">text</td>
+<td class="py-space-sm px-space-md"><span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-on-surface">UNIQUE NOT NULL</span></td>
+<td class="py-space-sm px-space-md text-on-surface-variant">—</td>
+<td class="py-space-sm px-space-md text-on-surface-variant">—</td>
+</tr>
+<tr class="hover:bg-surface-container/60 transition-colors">
+<td class="py-space-sm px-space-md text-primary font-semibold">users</td>
+<td class="py-space-sm px-space-md text-on-surface">role</td>
+<td class="py-space-sm px-space-md text-on-surface-variant">text</td>
+<td class="py-space-sm px-space-md"><span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-on-surface">CHECK (role IN ('student','organizer','admin'))</span></td>
+<td class="py-space-sm px-space-md text-on-surface-variant">—</td>
+<td class="py-space-sm px-space-md text-on-surface-variant">—</td>
+</tr>
+<tr class="hover:bg-surface-container/60 transition-colors">
+<td class="py-space-sm px-space-md text-secondary font-semibold">events</td>
+<td class="py-space-sm px-space-md text-on-surface">event_id</td>
+<td class="py-space-sm px-space-md text-on-surface-variant">uuid</td>
+<td class="py-space-sm px-space-md"><span class="px-1.5 py-0.5 rounded bg-tertiary-container/30 text-tertiary">PRIMARY KEY</span></td>
+<td class="py-space-sm px-space-md text-on-surface-variant">—</td>
+<td class="py-space-sm px-space-md text-on-surface-variant">—</td>
+</tr>
+<tr class="hover:bg-surface-container/60 transition-colors">
+<td class="py-space-sm px-space-md text-secondary font-semibold">events</td>
+<td class="py-space-sm px-space-md text-primary font-semibold">student_id</td>
+<td class="py-space-sm px-space-md text-on-surface-variant">uuid</td>
+<td class="py-space-sm px-space-md"><span class="px-1.5 py-0.5 rounded bg-primary-container text-on-primary-container">FOREIGN KEY</span></td>
+<td class="py-space-sm px-space-md text-primary">users(uuid)</td>
+<td class="py-space-sm px-space-md text-error">CASCADE</td>
+</tr>
+<tr class="hover:bg-surface-container/60 transition-colors">
+<td class="py-space-sm px-space-md text-secondary font-semibold">events</td>
+<td class="py-space-sm px-space-md text-on-surface">title</td>
+<td class="py-space-sm px-space-md text-on-surface-variant">text</td>
+<td class="py-space-sm px-space-md"><span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-on-surface">NOT NULL</span></td>
+<td class="py-space-sm px-space-md text-on-surface-variant">—</td>
+<td class="py-space-sm px-space-md text-on-surface-variant">—</td>
+</tr>
+<tr class="hover:bg-surface-container/60 transition-colors">
+<td class="py-space-sm px-space-md text-secondary font-semibold">events</td>
+<td class="py-space-sm px-space-md text-on-surface">capacity</td>
+<td class="py-space-sm px-space-md text-on-surface-variant">int4</td>
+<td class="py-space-sm px-space-md"><span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-on-surface">CHECK (capacity &gt; 0)</span></td>
+<td class="py-space-sm px-space-md text-on-surface-variant">—</td>
+<td class="py-space-sm px-space-md text-on-surface-variant">—</td>
+</tr>
+<tr class="hover:bg-surface-container/60 transition-colors">
+<td class="py-space-sm px-space-md text-tertiary font-semibold">registrations</td>
+<td class="py-space-sm px-space-md text-on-surface">id</td>
+<td class="py-space-sm px-space-md text-on-surface-variant">uuid</td>
+<td class="py-space-sm px-space-md"><span class="px-1.5 py-0.5 rounded bg-tertiary-container/30 text-tertiary">PRIMARY KEY</span></td>
+<td class="py-space-sm px-space-md text-on-surface-variant">—</td>
+<td class="py-space-sm px-space-md text-on-surface-variant">—</td>
+</tr>
+<tr class="hover:bg-surface-container/60 transition-colors">
+<td class="py-space-sm px-space-md text-tertiary font-semibold">registrations</td>
+<td class="py-space-sm px-space-md text-primary font-semibold">student_id</td>
+<td class="py-space-sm px-space-md text-on-surface-variant">uuid</td>
+<td class="py-space-sm px-space-md"><span class="px-1.5 py-0.5 rounded bg-primary-container text-on-primary-container">FOREIGN KEY</span></td>
+<td class="py-space-sm px-space-md text-primary">users(uuid)</td>
+<td class="py-space-sm px-space-md text-error">CASCADE</td>
+</tr>
+<tr class="hover:bg-surface-container/60 transition-colors">
+<td class="py-space-sm px-space-md text-tertiary font-semibold">registrations</td>
+<td class="py-space-sm px-space-md text-secondary font-semibold">event_id</td>
+<td class="py-space-sm px-space-md text-on-surface-variant">uuid</td>
+<td class="py-space-sm px-space-md"><span class="px-1.5 py-0.5 rounded bg-secondary-container/40 text-secondary">FOREIGN KEY</span></td>
+<td class="py-space-sm px-space-md text-secondary">events(event_id)</td>
+<td class="py-space-sm px-space-md text-error">CASCADE</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- RAW SQL DDL VIEWER SECTION -->
+<section class="px-margin py-space-sm mb-space-lg flex flex-col gap-space-sm" id="view-sql-section">
+<div class="rounded-2xl bg-surface-container-low p-space-lg shadow-md flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">code</span>
+<span class="font-title-md text-title-md font-semibold text-on-surface">PostgreSQL Raw DDL Script</span>
+<span class="font-badge-caps text-badge-caps px-1 rounded bg-surface-container-high text-on-surface-variant">schema.sql</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="flex items-center gap-1 px-space-sm py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-code-sm text-label-code-sm transition-all" id="copy-sql-btn" onclick="copySqlDdl()">
+<span class="material-symbols-outlined text-[15px]">content_copy</span>
+            Copy DDL
+          </button>
+<span class="font-label-code-sm text-label-code-sm text-on-surface-variant">Target: PostgreSQL 15+</span>
+</div>
+</div>
+<!-- Syntax-Highlighted Code Frame -->
+<div class="relative rounded-xl bg-surface-container-lowest p-space-md overflow-x-auto shadow-inner">
+<pre class="font-label-code-sm text-label-code-sm leading-relaxed text-on-surface"><code><span class="text-on-surface-variant">-- Enable UUID Generation Extension</span>
+<span class="text-secondary">CREATE EXTENSION IF NOT EXISTS</span> <span class="text-tertiary">"uuid-ossp"</span>;
+
+<span class="text-on-surface-variant">-- 1. Base Entity: users</span>
+<span class="text-secondary">CREATE TABLE IF NOT EXISTS</span> <span class="text-primary">users</span> (
+    <span class="text-tertiary">uuid</span> <span class="text-secondary">UUID PRIMARY KEY DEFAULT</span> gen_random_uuid(),
+    <span class="text-tertiary">email</span> <span class="text-secondary">TEXT NOT NULL UNIQUE</span>,
+    <span class="text-tertiary">role</span> <span class="text-secondary">TEXT NOT NULL CHECK</span> (role <span class="text-secondary">IN</span> (<span class="text-primary-fixed">'student'</span>, <span class="text-primary-fixed">'organizer'</span>, <span class="text-primary-fixed">'admin'</span>))
+);
+
+<span class="text-on-surface-variant">-- 2. Entity: events</span>
+<span class="text-secondary">CREATE TABLE IF NOT EXISTS</span> <span class="text-primary">events</span> (
+    <span class="text-tertiary">event_id</span> <span class="text-secondary">UUID PRIMARY KEY DEFAULT</span> gen_random_uuid(),
+    <span class="text-tertiary">student_id</span> <span class="text-secondary">UUID NOT NULL REFERENCES</span> <span class="text-primary">users</span>(uuid) <span class="text-secondary">ON DELETE CASCADE</span>,
+    <span class="text-tertiary">title</span> <span class="text-secondary">TEXT NOT NULL</span>,
+    <span class="text-tertiary">capacity</span> <span class="text-secondary">INT4 NOT NULL CHECK</span> (capacity &gt; 0),
+    <span class="text-tertiary">created_at</span> <span class="text-secondary">TIMESTAMPTZ NOT NULL DEFAULT</span> now()
+);
+
+<span class="text-on-surface-variant">-- 3. Junction Entity: registrations (User &lt;-&gt; Event M:N)</span>
+<span class="text-secondary">CREATE TABLE IF NOT EXISTS</span> <span class="text-primary">registrations</span> (
+    <span class="text-tertiary">id</span> <span class="text-secondary">UUID PRIMARY KEY DEFAULT</span> gen_random_uuid(),
+    <span class="text-tertiary">student_id</span> <span class="text-secondary">UUID NOT NULL REFERENCES</span> <span class="text-primary">users</span>(uuid) <span class="text-secondary">ON DELETE CASCADE</span>,
+    <span class="text-tertiary">event_id</span> <span class="text-secondary">UUID NOT NULL REFERENCES</span> <span class="text-primary">events</span>(event_id) <span class="text-secondary">ON DELETE CASCADE</span>,
+    <span class="text-tertiary">created_at</span> <span class="text-secondary">TIMESTAMPTZ NOT NULL DEFAULT</span> now(),
+    <span class="text-secondary">UNIQUE</span> (student_id, event_id)
+);
+
+<span class="text-on-surface-variant">-- High Performance Foreign Key Indices</span>
+<span class="text-secondary">CREATE INDEX idx_events_student_id ON</span> <span class="text-primary">events</span>(student_id);
+<span class="text-secondary">CREATE INDEX idx_registrations_student_id ON</span> <span class="text-primary">registrations</span>(student_id);
+<span class="text-secondary">CREATE INDEX idx_registrations_event_id ON</span> <span class="text-primary">registrations</span>(event_id);</code></pre>
+</div>
+</div>
+</section>
+</div>
+<script>
+  // Dynamic Tab Switcher for Top Controls
+  function switchView(tabKey) {
+    const erdView = document.getElementById('view-erd-canvas');
+    const dictView = document.getElementById('view-dict-section');
+    const sqlView = document.getElementById('view-sql-section');
+
+    const btnErd = document.getElementById('tab-erd');
+    const btnDict = document.getElementById('tab-dict');
+    const btnSql = document.getElementById('tab-sql');
+
+    // Reset buttons
+    [btnErd, btnDict, btnSql].forEach(b => {
+      b.className = "flex items-center gap-1.5 px-space-md py-1.5 rounded-lg text-on-surface-variant font-body-sm text-body-sm hover:text-on-surface hover:bg-surface-container transition-all";
+    });
+
+    if (tabKey === 'erd') {
+      erdView.classList.remove('hidden');
+      dictView.classList.add('hidden');
+      sqlView.classList.remove('hidden');
+      btnErd.className = "flex items-center gap-1.5 px-space-md py-1.5 rounded-lg bg-surface-container-lowest text-primary font-body-sm text-body-sm shadow-sm transition-all";
+    } else if (tabKey === 'dict') {
+      erdView.classList.add('hidden');
+      dictView.classList.remove('hidden');
+      sqlView.classList.add('hidden');
+      btnDict.className = "flex items-center gap-1.5 px-space-md py-1.5 rounded-lg bg-surface-container-lowest text-primary font-body-sm text-body-sm shadow-sm transition-all";
+    } else if (tabKey === 'sql') {
+      erdView.classList.add('hidden');
+      dictView.classList.add('hidden');
+      sqlView.classList.remove('hidden');
+      btnSql.className = "flex items-center gap-1.5 px-space-md py-1.5 rounded-lg bg-surface-container-lowest text-primary font-body-sm text-body-sm shadow-sm transition-all";
+    }
+  }
+
+  // Interactive Mock User Switcher with foreign key relation highlights
+  const mockDatabase = {
+    alex: {
+      uuid: 'usr_9f82d1c4',
+      email: 'alex@univ.edu',
+      role: 'organizer',
+      events: [
+        { title: 'Autonomous Robotics Hackathon', cap: 120, event_id: 'evt_88301fa9' },
+        { title: 'Campus AI Keynote 2025', cap: 350, event_id: 'evt_44b0e8c1' }
+      ],
+      registrations: [
+        { reg_id: 'reg_710ca09e', event_id: 'evt_88301fa9', status: 'CONFIRMED' }
+      ]
+    },
+    maya: {
+      uuid: 'usr_4a11b980',
+      email: 'maya@univ.edu',
+      role: 'student',
+      events: [],
+      registrations: [
+        { reg_id: 'reg_2231ab40', event_id: 'evt_88301fa9', status: 'CHECKED_IN' },
+        { reg_id: 'reg_988ff112', event_id: 'evt_44b0e8c1', status: 'CONFIRMED' },
+        { reg_id: 'reg_554ac88e', event_id: 'evt_70129bc3', status: 'WAITLISTED' }
+      ]
+    },
+    marcus: {
+      uuid: 'usr_7c34ea12',
+      email: 'marcus@univ.edu',
+      role: 'admin',
+      events: [
+        { title: 'Freshman Orientation Summit', cap: 600, event_id: 'evt_99182bf5' }
+      ],
+      registrations: []
+    }
+  };
+
+  function selectUserFilter(userKey) {
+    const data = mockDatabase[userKey];
+    if (!data) return;
+
+    // Toggle button styles
+    ['alex', 'maya', 'marcus'].forEach(k => {
+      const btn = document.getElementById('user-' + k);
+      if (k === userKey) {
+        btn.className = "flex items-center gap-1.5 px-space-sm py-1 rounded bg-primary-container text-on-primary-container font-label-code-sm text-label-code-sm font-semibold transition-all";
+      } else {
+        btn.className = "flex items-center gap-1.5 px-space-sm py-1 rounded hover:bg-surface-container-high text-on-surface font-label-code-sm text-label-code-sm transition-all";
+      }
+    });
+
+    // Update user node
+    document.getElementById('active-user-uuid').textContent = data.uuid;
+    document.getElementById('active-user-email').textContent = data.email;
+    const roleElem = document.getElementById('active-user-role');
+    roleElem.textContent = data.role;
+
+    // Update events box
+    const eventsBox = document.getElementById('events-record-box');
+    const eventsCount = document.getElementById('events-count-badge');
+    eventsCount.textContent = `${data.events.length} MATCHES`;
+    
+    if (data.events.length === 0) {
+      eventsBox.innerHTML = `<div class="p-space-sm text-on-surface-variant font-label-code-sm text-label-code-sm italic bg-surface-container-high/40 rounded">No hosted events matching student_id = ${data.uuid}</div>`;
+    } else {
+      eventsBox.innerHTML = data.events.map(ev => `
+        <div class="p-space-sm rounded bg-surface-container-high flex flex-col gap-1">
+          <div class="flex items-center justify-between">
+            <span class="font-body-sm text-body-sm text-on-surface font-medium truncate">${ev.title}</span>
+            <span class="font-badge-caps text-badge-caps text-on-surface-variant">cap: ${ev.cap}</span>
+          </div>
+          <div class="flex items-center justify-between font-label-code-sm text-label-code-sm">
+            <span class="text-secondary truncate">${ev.event_id}</span>
+            <span class="text-primary truncate">fk &rarr; ${data.uuid}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Update registrations box
+    const regBox = document.getElementById('registrations-record-box');
+    const regCount = document.getElementById('registrations-count-badge');
+    regCount.textContent = `${data.registrations.length} MATCHES`;
+
+    if (data.registrations.length === 0) {
+      regBox.innerHTML = `<div class="p-space-sm text-on-surface-variant font-label-code-sm text-label-code-sm italic bg-surface-container-high/40 rounded">No registration records linking student_id = ${data.uuid}</div>`;
+    } else {
+      regBox.innerHTML = data.registrations.map(r => `
+        <div class="p-space-sm rounded bg-surface-container-high flex flex-col gap-1">
+          <div class="flex items-center justify-between">
+            <span class="font-label-code-sm text-label-code-sm text-tertiary">${r.reg_id}</span>
+            <span class="font-badge-caps text-badge-caps text-primary">${r.status}</span>
+          </div>
+          <div class="flex flex-col font-label-code-sm text-label-code-sm text-on-surface-variant">
+            <span>student_id: <strong class="text-on-surface">${data.uuid}</strong></span>
+            <span>event_id: <strong class="text-secondary">${r.event_id}</strong></span>
+          </div>
+        </div>
+      `).join('');
+    }
+  }
+
+  // Animation Toggle for Bezier curves
+  let isPulsing = false;
+  function toggleConnectorAnimation() {
+    isPulsing = !isPulsing;
+    const paths = ['path-users-events', 'path-users-registrations', 'path-events-registrations'];
+    const btn = document.getElementById('flow-btn');
+    
+    paths.forEach(id => {
+      const p = document.getElementById(id);
+      if (p) {
+        if (isPulsing) {
+          p.style.strokeDashoffset = '100';
+          p.style.transition = 'stroke-dashoffset 2s linear';
+          p.style.animation = 'dashAnimation 1.5s linear infinite';
+        } else {
+          p.style.animation = 'none';
+        }
+      }
+    });
+
+    if (isPulsing) {
+      btn.classList.add('bg-primary', 'text-on-primary');
+      btn.classList.remove('bg-surface-container', 'text-on-surface-variant');
+    } else {
+      btn.classList.remove('bg-primary', 'text-on-primary');
+      btn.classList.add('bg-surface-container', 'text-on-surface-variant');
+    }
+  }
+
+  // Node Isolator
+  function isolateEntity(entityKey) {
+    const cards = {
+      users: document.getElementById('card-users'),
+      events: document.getElementById('card-events'),
+      registrations: document.getElementById('card-registrations')
+    };
+    const rels = {
+      'users-events': document.getElementById('rel-users-events'),
+      'users-reg': document.getElementById('rel-users-registrations'),
+      'events-reg': document.getElementById('rel-events-registrations')
+    };
+
+    if (entityKey === 'all') {
+      Object.values(cards).forEach(c => c.style.opacity = '1');
+      Object.values(rels).forEach(r => r.style.opacity = '1');
+      return;
+    }
+
+    Object.entries(cards).forEach(([key, el]) => {
+      el.style.opacity = (key === entityKey) ? '1' : '0.3';
+    });
+
+    if (entityKey === 'users') {
+      rels['users-events'].style.opacity = '1';
+      rels['users-reg'].style.opacity = '1';
+      rels['events-reg'].style.opacity = '0.1';
+    } else if (entityKey === 'events') {
+      rels['users-events'].style.opacity = '1';
+      rels['users-reg'].style.opacity = '0.1';
+      rels['events-reg'].style.opacity = '1';
+    } else if (entityKey === 'registrations') {
+      rels['users-events'].style.opacity = '0.1';
+      rels['users-reg'].style.opacity = '1';
+      rels['events-reg'].style.opacity = '1';
+    }
+  }
+
+  function highlightAllLinks() {
+    isolateEntity('all');
+  }
+
+  function inspectColumn(tbl, col) {
+    console.log(`Inspect: ${tbl}.${col}`);
+  }
+
+  function copySqlDdl() {
+    const btn = document.getElementById('copy-sql-btn');
+    navigator.clipboard.writeText(`CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+CREATE TABLE users (
+    uuid UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    email TEXT NOT NULL UNIQUE,
+    role TEXT NOT NULL CHECK (role IN ('student', 'organizer', 'admin'))
+);
+
+CREATE TABLE events (
+    event_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    student_id UUID NOT NULL REFERENCES users(uuid) ON DELETE CASCADE,
+    title TEXT NOT NULL,
+    capacity INT4 NOT NULL CHECK (capacity > 0),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE TABLE registrations (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    student_id UUID NOT NULL REFERENCES users(uuid) ON DELETE CASCADE,
+    event_id UUID NOT NULL REFERENCES events(event_id) ON DELETE CASCADE,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    UNIQUE (student_id, event_id)
+);`);
+    btn.innerHTML = `<span class="material-symbols-outlined text-[15px] text-primary">check</span> Copied!`;
+    setTimeout(() => {
+      btn.innerHTML = `<span class="material-symbols-outlined text-[15px]">content_copy</span> Copy DDL`;
+    }, 2000);
+  }
+</script>
+<style>
+  @keyframes dashAnimation {
+    from {
+      stroke-dashoffset: 40;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+</style></main><footer class="w-full bg-surface-container-low py-space-lg"><div class="w-full px-margin flex flex-col md:flex-row items-center justify-between gap-space-md text-on-surface-variant font-label-code-sm text-label-code-sm"><div>CampusEvent Engine • Relational Runtime (PostgreSQL Local Pool)</div><div class="flex items-center gap-space-lg"><span class="flex items-center gap-1.5"><span class="h-2 w-2 rounded-full bg-primary"></span>Mock DB Sync Active</span><span>Schema v2.4.0</span></div></div></footer></body></html>
