@@ -15,6 +15,11 @@ supabase: Client = create_client(
 print("Created")
 
 
+@app.get('/health')
+def health():
+    return jsonify(status='ok'), 200
+
+
 def _authenticated_user():
     authorization = request.headers.get("Authorization", "")
     scheme, _, token = authorization.partition(" ")
@@ -136,4 +141,4 @@ def list_event_registrations(event_id):
     return jsonify(response.data), 200
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=False)
